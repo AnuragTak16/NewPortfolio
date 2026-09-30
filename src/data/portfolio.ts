@@ -5,7 +5,7 @@ export const site = {
   location: 'Bengaluru, India',
   phone: '+91 9340392268',
   summary:
-    'Full Stack Developer with 2+ years of experience building and shipping production-grade web applications — strong in Node.js, Express, TypeScript, MongoDB, and Python backends, comfortable owning features end-to-end.',
+    'Full Stack Developer with 2+ years of experience building and shipping production-grade web applications  strong in Node.js, Express, TypeScript, MongoDB, and Python backends, comfortable owning features end-to-end.',
 }
 
 export const navLinks = [
@@ -57,10 +57,11 @@ export const projects = [
     id: '01',
     title: 'Dance Studio Platform',
     year: '2025',
-    category: 'SaaS · MERN',
+    category: 'SaaS · MERN · TypeScript',
     description:
       'Multi-tenant dance studio management — student profiles, enrollment workflows, attendance views, and Stripe subscription billing.',
     stack: ['React', 'Node.js', 'MongoDB', 'Stripe', 'JWT'],
+    image: '/projects/enrollio.png',
     hue: 'from-[#e24a2c]/35 to-[#0b1f3a]/15',
   },
   {

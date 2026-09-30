@@ -128,7 +128,7 @@ export function Connect() {
     <section id="connect" ref={root} className="relative bg-mist">
       <div className="relative flex min-h-svh items-center overflow-hidden">
         <p className="connect-ghost pointer-events-none absolute inset-x-0 top-[18%] select-none text-center font-heading text-[clamp(4rem,16vw,14rem)] font-semibold leading-none tracking-[-0.06em] text-heading/[0.08]">
-        Lets build the next thing.``
+        Lets build the next thing.
         </p>
 
         <div className="connect-panel absolute inset-0 flex flex-col justify-between bg-heading text-mist">

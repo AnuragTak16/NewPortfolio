@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger)
 const lines = [
   'Building production',
   'web apps end to',
-  'end — APIs, data,',
+  'end  APIs, data,',
   'and UI.',
 ]
 
@@ -53,13 +53,6 @@ export function Hero() {
         yoyo: true,
         ease: 'sine.inOut',
       })
-      gsap.to('.hero-rule', {
-        scaleX: 1.08,
-        duration: 7,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      })
       gsap.to('.hero-shift', {
         yPercent: 10,
         ease: 'none',
@@ -85,7 +78,6 @@ export function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(155deg,var(--hero-a)_0%,var(--hero-b)_46%,var(--hero-c)_100%)]" />
         <div className="hero-wash absolute -right-[18%] top-[-10%] h-[75vmin] w-[75vmin] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--signal)_22%,transparent),transparent_68%)]" />
         <div className="hero-wash absolute -left-[20%] bottom-[-25%] h-[55vmin] w-[55vmin] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--heading)_7%,transparent),transparent_70%)]" />
-        <div className="hero-shift hero-rule absolute left-[-5%] top-[36%] h-px w-[65%] origin-left bg-gradient-to-r from-transparent via-heading/15 to-transparent" />
         <div className="hero-shift absolute right-[8%] top-[18%] hidden h-44 w-px bg-gradient-to-b from-signal/55 to-transparent lg:block" />
       </div>
 
