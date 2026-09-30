@@ -227,9 +227,6 @@ export function Navbar() {
         </a>
 
         <div className="nav-in hidden h-7 items-center overflow-hidden border-l border-border pl-4 md:flex">
-          <span className="mr-2 text-[10px] uppercase tracking-[0.18em] text-heading/60">
-            Now
-          </span>
           <span
             ref={scrambleRef}
             className="font-heading text-sm font-semibold tracking-[0.08em] text-signal"
