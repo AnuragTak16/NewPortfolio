@@ -165,7 +165,7 @@ export function Experience() {
                 Experience
               </p>
               <h2 className="mt-3 max-w-xl font-heading text-4xl font-semibold tracking-tight text-heading lg:text-5xl">
-                Roles where craft met shipping speed.
+                Roles where APIs met product shipping.
               </h2>
             </div>
             <div className="flex gap-4">
@@ -225,7 +225,7 @@ export function Experience() {
           Experience
         </p>
         <h2 className="mt-3 font-heading text-4xl font-semibold tracking-tight text-heading">
-          Roles where craft met shipping speed.
+          Roles where APIs met product shipping.
         </h2>
         <div className="mt-10 space-y-5">
           {experience.map((item, index) => (

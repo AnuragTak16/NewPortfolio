@@ -1,87 +1,81 @@
-import { useLayoutEffect, useRef, useState, type FormEvent } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ArrowUpRight, Send } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
+import { Magnetic } from '@/components/motion'
 import { site, socials } from '@/data/portfolio'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export function Connect() {
   const root = useRef<HTMLElement>(null)
-  const [sent, setSent] = useState(false)
 
   useLayoutEffect(() => {
     const mm = gsap.matchMedia()
 
-    const revealForm = () => {
-      gsap.fromTo(
-        '.connect-letter',
-        { yPercent: 110, autoAlpha: 0 },
-        {
-          yPercent: 0,
-          autoAlpha: 1,
-          duration: 0.9,
-          stagger: 0.03,
-          ease: 'power4.out',
-          scrollTrigger: { trigger: root.current, start: 'top 72%' },
-        },
-      )
-      gsap.fromTo(
-        '.connect-panel',
-        { autoAlpha: 0, scale: 0.96, filter: 'blur(8px)' },
-        {
-          autoAlpha: 1,
-          scale: 1,
-          filter: 'blur(0px)',
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: root.current, start: 'top 68%' },
-        },
-      )
-    }
-
     mm.add('(min-width: 768px)', () => {
-      const mask = root.current?.querySelector('.connect-mask')
-      if (!mask) return
+      const panel = root.current?.querySelector('.connect-panel')
+      if (!panel) return
 
-      gsap.set(mask, { clipPath: 'circle(0% at 50% 72%)' })
-      gsap.set('.connect-letter', { yPercent: 110, autoAlpha: 0 })
-      gsap.set('.connect-panel', { autoAlpha: 0, scale: 0.96 })
-      gsap.set('.connect-ghost', { scale: 1.1, opacity: 1 })
+      gsap.set(panel, { clipPath: 'inset(0 100% 0 0)' })
+      gsap.set('.connect-line', { scaleX: 0, transformOrigin: 'left center' })
+      gsap.set('.connect-rise', { y: 48, autoAlpha: 0 })
+      gsap.set('.connect-social', { x: -24, autoAlpha: 0 })
+      gsap.set('.connect-marquee', { xPercent: 0 })
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: 'top top',
-          end: '+=110%',
+          end: '+=140%',
           pin: true,
-          scrub: 0.8,
+          scrub: 0.85,
           anticipatePin: 1,
         },
       })
 
-      tl.fromTo(
-        mask,
-        { clipPath: 'circle(0% at 50% 72%)' },
-        { clipPath: 'circle(150% at 50% 50%)', ease: 'none', duration: 1 },
-      )
-        .fromTo(
-          '.connect-ghost',
-          { scale: 1.1, opacity: 1 },
-          { scale: 0.8, opacity: 0, ease: 'none', duration: 0.65 },
-          0,
+      tl.to('.connect-ghost', {
+        xPercent: -18,
+        autoAlpha: 0.15,
+        ease: 'none',
+        duration: 0.55,
+      })
+        .to(
+          panel,
+          { clipPath: 'inset(0 0% 0 0)', ease: 'none', duration: 0.85 },
+          0.15,
         )
-        .fromTo(
-          '.connect-letter',
-          { yPercent: 110, autoAlpha: 0 },
-          { yPercent: 0, autoAlpha: 1, stagger: 0.025, ease: 'none', duration: 0.5 },
+        .to(
+          '.connect-rise',
+          {
+            y: 0,
+            autoAlpha: 1,
+            stagger: 0.08,
+            ease: 'none',
+            duration: 0.45,
+          },
+          0.45,
+        )
+        .to(
+          '.connect-line',
+          { scaleX: 1, ease: 'none', duration: 0.4 },
+          0.55,
+        )
+        .to(
+          '.connect-social',
+          {
+            x: 0,
+            autoAlpha: 1,
+            stagger: 0.08,
+            ease: 'none',
+            duration: 0.35,
+          },
+          0.65,
+        )
+        .to(
+          '.connect-marquee',
+          { xPercent: -35, ease: 'none', duration: 0.7 },
           0.35,
-        )
-        .fromTo(
-          '.connect-panel',
-          { autoAlpha: 0, scale: 0.96 },
-          { autoAlpha: 1, scale: 1, ease: 'none', duration: 0.45 },
-          0.5,
         )
 
       return () => {
@@ -91,127 +85,117 @@ export function Connect() {
     })
 
     mm.add('(max-width: 767px)', () => {
-      gsap.set('.connect-mask', { clipPath: 'circle(150% at 50% 50%)' })
-      gsap.set('.connect-ghost', { opacity: 0 })
-      revealForm()
+      gsap.set('.connect-panel', { clipPath: 'inset(0 0% 0 0)' })
+      gsap.set('.connect-ghost', { autoAlpha: 0.12 })
+
+      gsap.from('.connect-rise', {
+        y: 28,
+        autoAlpha: 0,
+        stagger: 0.1,
+        duration: 0.7,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: root.current, start: 'top 75%' },
+      })
+      gsap.from('.connect-line', {
+        scaleX: 0,
+        transformOrigin: 'left center',
+        duration: 0.8,
+        ease: 'power3.inOut',
+        scrollTrigger: { trigger: root.current, start: 'top 70%' },
+      })
+      gsap.from('.connect-social', {
+        x: -16,
+        autoAlpha: 0,
+        stagger: 0.08,
+        duration: 0.55,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: root.current, start: 'top 68%' },
+      })
     })
 
     return () => mm.revert()
   }, [])
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    setSent(true)
-  }
-
-  const word = "Let's connect"
+  const ticker = [
+    'Open to remote roles',
+    'Full stack delivery',
+    'APIs · UI · Data',
+    site.location,
+    'Say hello',
+  ]
 
   return (
     <section id="connect" ref={root} className="relative bg-mist">
-      <div className="connect-stage relative flex min-h-svh items-center overflow-hidden">
-        <p className="connect-ghost pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-heading text-[clamp(3.2rem,12vw,10rem)] font-semibold leading-none tracking-[-0.05em] text-ink/10">
-          Let&apos;s connect
+      <div className="relative flex min-h-svh items-center overflow-hidden">
+        <p className="connect-ghost pointer-events-none absolute inset-x-0 top-[18%] select-none text-center font-heading text-[clamp(4rem,16vw,14rem)] font-semibold leading-none tracking-[-0.06em] text-heading/[0.08]">
+        Lets build the next thing.``
         </p>
 
-        <div
-          className="connect-mask absolute inset-0 flex items-center bg-ink text-mist"
-          style={{ clipPath: 'circle(0% at 50% 72%)' }}
-        >
-          <div className="section-pad mx-auto grid w-full max-w-7xl items-center gap-10 py-24 lg:grid-cols-[1fr_1fr]">
-            <div style={{ perspective: '1200px' }}>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal-soft">
+        <div className="connect-panel absolute inset-0 flex flex-col justify-between bg-heading text-mist">
+          <div className="connect-marquee overflow-hidden border-b border-white/10 py-3">
+            <div className="flex w-max gap-10 whitespace-nowrap will-change-transform">
+              {[...ticker, ...ticker, ...ticker].map((item, i) => (
+                <span
+                  key={`${item}-${i}`}
+                  className="text-xs font-semibold uppercase tracking-[0.22em] text-mist/45"
+                >
+                  {item}
+                  <span className="ml-10 inline-block size-1.5 translate-y-[-1px] bg-signal" />
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="section-pad mx-auto grid w-full max-w-7xl flex-1 items-center gap-12 py-16 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <p className="connect-rise text-xs font-semibold uppercase tracking-[0.22em] text-signal-soft">
                 Contact
               </p>
-              <h2 className="mt-4 font-heading text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-[0.92] tracking-[-0.04em] text-mist">
-                {word.split(' ').map((part) => (
-                  <span key={part} className="block overflow-hidden">
-                    {part.split('').map((char, i) => (
-                      <span
-                        key={`${part}-${i}`}
-                        className="connect-letter inline-block"
-                      >
-                        {char}
-                      </span>
-                    ))}
-                  </span>
-                ))}
+              <h2 className="connect-rise mt-5 font-heading text-[clamp(3rem,8vw,6.5rem)] font-semibold leading-[0.9] tracking-[-0.05em]">
+                Let&apos;s build
+                <span className="block text-signal">the next thing.</span>
               </h2>
-              <a
-                href={`mailto:${site.email}`}
-                className="group mt-8 inline-flex items-center gap-2 text-lg text-mist/80 transition-colors hover:text-signal-soft"
-              >
-                {site.email}
-                <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </a>
-              <ul className="mt-8 flex gap-6">
+              <div className="connect-line mt-8 h-px w-28 bg-signal" />
+              <p className="connect-rise mt-8 max-w-md text-base leading-relaxed text-mist/65 sm:text-lg">
+                Available for full-stack product work — APIs, data, and UI that
+                ship clean.
+              </p>
+            </div>
+
+            <div className="lg:col-span-5 lg:justify-self-end">
+              <Magnetic strength={0.2}>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="connect-rise group inline-flex items-center gap-3 border border-white/20 px-6 py-4 text-lg transition-colors hover:border-signal hover:text-signal-soft sm:text-xl"
+                >
+                  {site.email}
+                  <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              </Magnetic>
+
+              <ul className="mt-10 space-y-0">
                 {socials.map((social) => (
                   <li key={social.label}>
                     <a
                       href={social.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-sm text-mist/60 transition-colors hover:text-mist"
+                      className="connect-social group flex items-center justify-between border-t border-white/10 py-4 text-sm uppercase tracking-[0.16em] text-mist/55 transition-colors hover:text-mist"
                     >
                       {social.label}
+                      <ArrowUpRight className="size-4 opacity-0 transition-all group-hover:opacity-100" />
                     </a>
                   </li>
                 ))}
               </ul>
             </div>
+          </div>
 
-            <form
-              onSubmit={onSubmit}
-              className="connect-panel space-y-4 border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:p-8"
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              <label className="block">
-                <span className="mb-2 block text-xs uppercase tracking-[0.16em] text-mist/50">
-                  Name
-                </span>
-                <input
-                  required
-                  name="name"
-                  className="w-full border-b border-white/20 bg-transparent py-3 text-mist outline-none focus:border-signal-soft"
-                  placeholder="Your name"
-                />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-xs uppercase tracking-[0.16em] text-mist/50">
-                  Email
-                </span>
-                <input
-                  required
-                  type="email"
-                  name="email"
-                  className="w-full border-b border-white/20 bg-transparent py-3 text-mist outline-none focus:border-signal-soft"
-                  placeholder="you@studio.com"
-                />
-              </label>
-              <label className="block">
-                <span className="mb-2 block text-xs uppercase tracking-[0.16em] text-mist/50">
-                  Message
-                </span>
-                <textarea
-                  required
-                  name="message"
-                  rows={4}
-                  className="w-full resize-none border-b border-white/20 bg-transparent py-3 text-mist outline-none focus:border-signal-soft"
-                  placeholder="Tell me about the project…"
-                />
-              </label>
-              <div className="flex flex-wrap items-center gap-4 pt-3">
-                <button
-                  type="submit"
-                  className="inline-flex items-center gap-2 bg-mist px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-signal-soft"
-                >
-                  Send
-                  <Send className="size-4" />
-                </button>
-                {sent && (
-                  <p className="text-sm text-signal-soft">Thanks — I&apos;ll reply soon.</p>
-                )}
-              </div>
-            </form>
+          <div className="section-pad border-t border-white/10 py-5">
+            <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 text-xs uppercase tracking-[0.18em] text-mist/40">
+              <span>{site.name}</span>
+              <span>Bengaluru · Remote</span>
+            </div>
           </div>
         </div>
       </div>

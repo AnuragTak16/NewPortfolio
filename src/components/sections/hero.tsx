@@ -9,9 +9,10 @@ import { scrollToId } from '@/hooks/use-smooth-scroll'
 gsap.registerPlugin(ScrollTrigger)
 
 const lines = [
-  'Designing digital',
-  'products that feel',
-  'calm, clear, and alive.',
+  'Building production',
+  'web apps end to',
+  'end — APIs, data,',
+  'and UI.',
 ]
 
 export function Hero() {
@@ -28,7 +29,7 @@ export function Hero() {
           {
             yPercent: 110,
             duration: 1.05,
-            stagger: 0.12,
+            stagger: 0.1,
             ease: 'power4.out',
           },
           '-=0.15',
@@ -84,25 +85,27 @@ export function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(155deg,var(--hero-a)_0%,var(--hero-b)_46%,var(--hero-c)_100%)]" />
         <div className="hero-wash absolute -right-[18%] top-[-10%] h-[75vmin] w-[75vmin] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--signal)_22%,transparent),transparent_68%)]" />
         <div className="hero-wash absolute -left-[20%] bottom-[-25%] h-[55vmin] w-[55vmin] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--heading)_7%,transparent),transparent_70%)]" />
-        <div className="hero-shift hero-rule absolute left-[-5%] top-[38%] h-px w-[70%] origin-left bg-gradient-to-r from-transparent via-heading/20 to-transparent" />
-        <div className="hero-shift absolute right-[8%] top-[22%] hidden h-40 w-px bg-gradient-to-b from-signal/50 to-transparent lg:block" />
+        <div className="hero-shift hero-rule absolute left-[-5%] top-[36%] h-px w-[65%] origin-left bg-gradient-to-r from-transparent via-heading/15 to-transparent" />
+        <div className="hero-shift absolute right-[8%] top-[18%] hidden h-44 w-px bg-gradient-to-b from-signal/55 to-transparent lg:block" />
       </div>
 
-      <div className="section-pad relative z-10 mx-auto grid w-full max-w-7xl gap-12 lg:grid-cols-12 lg:items-end">
+      <div className="section-pad relative z-10 mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-12 lg:items-end lg:gap-8">
         <div className="lg:col-span-8">
-          <p className="hero-kicker text-sm font-semibold uppercase tracking-[0.22em] text-signal">
+          <p className="hero-kicker text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-signal sm:text-xs">
             {site.role} · {site.location}
           </p>
 
-          <h1 className="mt-6 font-heading text-[clamp(2.6rem,6.8vw,5.6rem)] font-semibold leading-[0.94] tracking-[-0.045em] text-heading">
+          <h1 className="mt-5 max-w-[11ch] font-heading text-[clamp(2.85rem,7.2vw,5.85rem)] font-semibold leading-[0.9] tracking-[-0.05em] text-heading sm:max-w-none">
             {lines.map((line) => (
-              <span key={line} className="block overflow-hidden pb-[0.06em]">
-                <span className="hero-line-inner inline-block">{line}</span>
+              <span key={line} className="block overflow-hidden">
+                <span className="hero-line-inner inline-block pb-[0.04em]">
+                  {line}
+                </span>
               </span>
             ))}
           </h1>
 
-          <div className="mt-10 flex flex-wrap items-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center gap-3 sm:mt-11">
             <Magnetic>
               <button
                 type="button"
@@ -116,7 +119,7 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => scrollToId('#connect')}
-                className="hero-cta inline-flex items-center gap-2 border border-heading/15 px-6 py-3.5 text-base font-medium text-heading transition-colors hover:border-signal hover:text-signal"
+                className="hero-cta inline-flex items-center gap-2 border border-heading/20 px-6 py-3.5 text-base font-medium text-heading transition-colors hover:border-signal hover:text-signal"
               >
                 Start a project
                 <ArrowDownRight className="size-4" />
@@ -125,18 +128,17 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hero-aside lg:col-span-4 lg:pb-2">
-          <p className="max-w-sm text-base leading-relaxed text-muted-foreground sm:text-lg lg:ml-auto lg:text-right">
-            Frontend craft with intentional motion, sharp hierarchy, and product
-            polish that holds up after the first scroll.
+        <div className="hero-aside flex flex-col lg:col-span-4 lg:items-end lg:pb-1">
+          <p className="max-w-[18rem] text-[0.95rem] leading-[1.65] text-muted-foreground sm:text-base lg:text-right">
+            {site.summary}
           </p>
           <button
             type="button"
             onClick={() => scrollToId('#about')}
-            className="hero-aside mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.16em] text-heading transition-colors hover:text-signal lg:ml-auto"
+            className="hero-aside mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-heading/70 transition-colors hover:text-signal lg:mt-10"
           >
             Explore
-            <ArrowDownRight className="size-4" />
+            <ArrowDownRight className="size-3.5" />
           </button>
         </div>
       </div>

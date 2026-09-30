@@ -1,8 +1,11 @@
 export const site = {
   name: 'Anurag Tak',
-  role: 'Frontend Engineer',
-  email: 'hello@anuragtak.dev',
-  location: 'India',
+  role: 'Full Stack Developer',
+  email: 'anuragtak16@gmail.com',
+  location: 'Bengaluru, India',
+  phone: '+91 9340392268',
+  summary:
+    'Full Stack Developer with 2+ years of experience building and shipping production-grade web applications — strong in Node.js, Express, TypeScript, MongoDB, and Python backends, comfortable owning features end-to-end.',
 }
 
 export const navLinks = [
@@ -17,112 +20,88 @@ export const skills = [
   'React',
   'TypeScript',
   'Next.js',
-  'GSAP',
-  'Tailwind',
   'Node.js',
-  'Design Systems',
-  'Motion Design',
-  'Vite',
-  'UI Craft',
+  'Express',
+  'Python',
+  'FastAPI',
+  'MongoDB',
+  'PostgreSQL',
+  'Socket.IO',
+  'Stripe',
+  'Docker',
+  'AWS',
+  'Tailwind CSS',
 ]
 
 export const stackGroups = [
   {
-    label: 'Interface',
-    items: ['React', 'TypeScript', 'Next.js', 'Vite', 'Tailwind CSS'],
+    label: 'Frontend',
+    items: ['React.js', 'Next.js', 'TypeScript', 'Redux Toolkit', 'TanStack Query', 'Tailwind CSS'],
   },
   {
-    label: 'Motion',
-    items: ['GSAP', 'ScrollTrigger', 'Lenis', 'Framer Motion', 'CSS'],
+    label: 'Backend',
+    items: ['Node.js', 'Express.js', 'FastAPI', 'Django', 'REST APIs', 'Socket.IO', 'JWT'],
   },
   {
-    label: 'Systems',
-    items: ['Storybook', 'Design Tokens', 'Radix', 'shadcn/ui', 'Figma'],
+    label: 'Data',
+    items: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Kafka', 'SQLAlchemy'],
   },
   {
     label: 'Delivery',
-    items: ['Node.js', 'REST', 'Git', 'Vercel', 'Performance'],
+    items: ['Docker', 'GitHub Actions', 'AWS', 'Azure', 'Nginx', 'Vercel'],
   },
 ]
 
 export const projects = [
   {
     id: '01',
-    title: 'Orbit Analytics',
+    title: 'Dance Studio Platform',
     year: '2025',
-    category: 'Product UI',
+    category: 'SaaS · MERN',
     description:
-      'A realtime insights dashboard with kinetic charts and calm information hierarchy.',
-    stack: ['React', 'TypeScript', 'D3'],
+      'Multi-tenant dance studio management — student profiles, enrollment workflows, attendance views, and Stripe subscription billing.',
+    stack: ['React', 'Node.js', 'MongoDB', 'Stripe', 'JWT'],
     hue: 'from-[#e24a2c]/35 to-[#0b1f3a]/15',
   },
   {
     id: '02',
-    title: 'Northline Studio',
+    title: 'Restaurant Waitlist',
     year: '2024',
-    category: 'Brand Site',
+    category: 'Realtime · Backend',
     description:
-      'A scroll-driven studio site where typography and pacing carry the narrative.',
-    stack: ['Vite', 'GSAP', 'Tailwind'],
+      'US restaurant reservation platform with capacity-based seating, waitlists, atomic booking, and live table status over Socket.IO.',
+    stack: ['Python', 'FastAPI', 'PostgreSQL', 'Socket.IO'],
     hue: 'from-[#3d5a80]/40 to-[#0b1f3a]/12',
-  },
-  {
-    id: '03',
-    title: 'Pulse Commerce',
-    year: '2024',
-    category: 'E-commerce',
-    description:
-      'A conversion-focused storefront with tactile micro-interactions and fast browsing.',
-    stack: ['Next.js', 'Stripe', 'CMS'],
-    hue: 'from-[#7a8fa6]/45 to-[#0b1f3a]/12',
-  },
-  {
-    id: '04',
-    title: 'Atlas Docs',
-    year: '2023',
-    category: 'Design System',
-    description:
-      'Component library and docs that keep product teams shipping consistent UI.',
-    stack: ['Storybook', 'React', 'Tokens'],
-    hue: 'from-[#0b1f3a]/30 to-[#fad9d1]/45',
   },
 ]
 
 export const experience = [
   {
-    period: '2024 — Present',
-    role: 'Senior Frontend Engineer',
-    company: 'Studio Current',
+    period: 'Jul 2024 — Present',
+    role: 'Full Stack Developer',
+    company: 'DAAS – Developer-as-a-Service',
     detail:
-      'Leading interface architecture, motion systems, and performance for product launches.',
-    stack: ['React', 'GSAP', 'TypeScript', 'Design Systems'],
+      'Owning end-to-end features across Python, Node.js, Express, React, and MongoDB — schema design, REST APIs, JWT auth, and frontend integration. Shipped 15+ API endpoints and reusable React/Tailwind components for production workflows.',
+    stack: ['Python', 'Node.js', 'React', 'MongoDB', 'JWT'],
   },
   {
-    period: '2022 — 2024',
-    role: 'Frontend Engineer',
-    company: 'Northwave Labs',
+    period: '2020 — 2024',
+    role: 'B.Tech CSE (AI & ML)',
+    company: 'Acropolis Institute of Technology and Research',
     detail:
-      'Shipped design systems, marketing experiences, and complex SPA workflows.',
-    stack: ['Next.js', 'Tailwind', 'Node.js', 'Storybook'],
-  },
-  {
-    period: '2020 — 2022',
-    role: 'UI Engineer',
-    company: 'Freelance',
-    detail:
-      'Partnered with founders and agencies on brand sites, dashboards, and prototypes.',
-    stack: ['Vite', 'React', 'Figma', 'CSS'],
+      'Computer Science Engineering with AI & ML focus. CGPA 8.3. Built foundations in data structures, systems design, and full-stack product work.',
+    stack: ['DSA', 'AI/ML', 'Web', 'Systems'],
   },
 ]
 
 export const socials = [
-  { label: 'GitHub', href: 'https://github.com' },
-  { label: 'LinkedIn', href: 'https://linkedin.com' },
-  { label: 'X', href: 'https://x.com' },
+  { label: 'GitHub', href: 'https://github.com/AnuragTak16' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/anurag-tak' },
+  { label: 'Email', href: 'mailto:anuragtak16@gmail.com' },
 ]
 
 export const aboutStats = [
-  { label: 'Years shipping', value: '05+' },
-  { label: 'Products launched', value: '30+' },
-  { label: 'Motion systems', value: '12' },
+  { label: 'Years shipping', value: '02+' },
+  { label: 'REST APIs shipped', value: '15+' },
+  { label: 'CGPA', value: '8.3' },
 ]

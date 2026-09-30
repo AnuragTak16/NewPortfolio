@@ -5,23 +5,23 @@ import { aboutStats, site } from '@/data/portfolio'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const statement = 'Building products people feel before they read.'
+const statement = 'Shipping production apps end to end.'
 
 const principles = [
   {
     id: '01',
-    title: 'Clarity',
-    detail: 'Hierarchy first. Type, space, and pace do the talking.',
+    title: 'Own it',
+    detail: 'Schema to UI — features shipped as one coherent path.',
   },
   {
     id: '02',
-    title: 'Pace',
-    detail: 'Motion only when it helps the story move forward.',
+    title: 'Reliable',
+    detail: 'Auth, validation, and indexes before the demo glow.',
   },
   {
     id: '03',
-    title: 'Craft',
-    detail: 'The small decisions you notice after the second visit.',
+    title: 'Realtime',
+    detail: 'APIs and sockets that stay correct under concurrent use.',
   },
 ]
 
@@ -133,14 +133,15 @@ export function About() {
           <div className="bio-copy-wrap flex flex-col justify-between lg:col-span-8">
             <div className="space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
               <p className="bio-copy">
-                I&apos;m {site.name}, a {site.role.toLowerCase()} working between
-                product engineering and art direction. Interfaces should feel
-                considered before anyone reads a label.
+                I&apos;m {site.name}, a {site.role.toLowerCase()} with 2+ years
+                building production web apps — Node.js, Express, TypeScript,
+                MongoDB, and Python backends, plus React on the frontend.
               </p>
               <p className="bio-copy">
-                I partner with founders and studios on design systems,
-                marketing sites, and scroll-led stories that stay fast. Based
-                in {site.location}, open to work that cares about craft.
+                I design scalable APIs, auth systems, realtime flows, and MVC
+                architectures, and I&apos;m comfortable owning features from
+                schema to UI. Based in {site.location}, open to remote teams
+                that ship fast.
               </p>
             </div>
 
