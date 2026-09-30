@@ -5,7 +5,7 @@ export const site = {
   location: 'Bengaluru, India',
   phone: '+91 9340392268',
   summary:
-    'Full-stack developer with 2+ years shipping production web apps — Node.js, Express, TypeScript, MongoDB, and Python owning features from schema to UI.',
+    'Full-stack developer with 2+ years shipping production web apps — Node.js, Express, TypeScript, MongoDB, and Python  owning features from schema to UI.',
 }
 
 export const navLinks = [
@@ -43,7 +43,7 @@ export const stackGroups = [
     items: ['Node.js', 'Express.js', 'FastAPI', 'Django', 'REST APIs', 'Socket.IO', 'JWT'],
   },
   {
-    label: 'Data',
+    label: 'DataBase',
     items: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Kafka', 'SQLAlchemy'],
   },
   {
