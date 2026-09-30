@@ -1,25 +1,48 @@
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { skills } from '@/data/portfolio'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export function Marquee() {
   const root = useRef<HTMLElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
+    const rootEl = root.current
+    const track = trackRef.current
+    if (!rootEl || !track) return
+
     const ctx = gsap.context(() => {
-      gsap.to('.marquee-a', {
-        xPercent: -50,
-        duration: 28,
+      const half = track.scrollWidth / 2
+      const tween = gsap.to(track, {
+        x: -half,
+        duration: 30,
         ease: 'none',
         repeat: -1,
       })
-      gsap.to('.marquee-b', {
-        xPercent: 50,
-        duration: 34,
-        ease: 'none',
-        repeat: -1,
+
+      const skewTo = gsap.quickTo(track, 'skewX', {
+        duration: 0.45,
+        ease: 'power3.out',
       })
-    }, root)
+
+      ScrollTrigger.create({
+        trigger: rootEl,
+        start: 'top bottom',
+        end: 'bottom top',
+        onUpdate: (self) => {
+          const velocity = self.getVelocity()
+          skewTo(gsap.utils.clamp(-10, 10, velocity / 400))
+          const boost = 1 + Math.min(Math.abs(velocity) / 2000, 1.8)
+          tween.timeScale(self.direction === -1 ? -boost : boost)
+        },
+      })
+
+      ScrollTrigger.addEventListener('scrollEnd', () => skewTo(0))
+    }, rootEl)
+
     return () => ctx.revert()
   }, [])
 
@@ -28,29 +51,26 @@ export function Marquee() {
   return (
     <section
       ref={root}
-      aria-label="Skills"
-      className="overflow-hidden border-y border-border/70 bg-ink py-4 text-mist"
+      aria-label="Stack"
+      className="relative overflow-hidden border-y border-heading/10 bg-mist py-10 sm:py-12"
     >
-      <div className="marquee-a flex w-max gap-10 whitespace-nowrap will-change-transform">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-mist to-transparent sm:w-20" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-mist to-transparent sm:w-20" />
+
+      <div
+        ref={trackRef}
+        className="relative flex w-max items-center will-change-transform"
+      >
         {row.map((skill, i) => (
-          <span
-            key={`a-${skill}-${i}`}
-            className="font-heading text-sm font-semibold uppercase tracking-[0.18em] sm:text-base"
+          <div
+            key={`${skill}-${i}`}
+            className="flex shrink-0 items-center px-5 sm:px-8"
           >
-            {skill}
-            <span className="ml-10 inline-block size-1.5 translate-y-[-1px] bg-signal" />
-          </span>
-        ))}
-      </div>
-      <div className="marquee-b mt-3 flex w-max -translate-x-1/2 gap-10 whitespace-nowrap will-change-transform opacity-45">
-        {[...row].reverse().map((skill, i) => (
-          <span
-            key={`b-${skill}-${i}`}
-            className="font-heading text-sm font-semibold uppercase tracking-[0.18em] sm:text-base"
-          >
-            {skill}
-            <span className="ml-10 inline-block size-1.5 translate-y-[-1px] bg-signal" />
-          </span>
+            <span className="font-heading text-[clamp(1.6rem,4vw,2.6rem)] font-semibold tracking-[-0.03em] text-heading/80">
+              {skill}
+            </span>
+            <span className="ml-5 size-1.5 shrink-0 rotate-45 bg-signal sm:ml-8" />
+          </div>
         ))}
       </div>
     </section>

@@ -9,251 +9,128 @@ export function Experience() {
   const root = useRef<HTMLElement>(null)
 
   useLayoutEffect(() => {
-    const mm = gsap.matchMedia()
-
-    mm.add('(min-width: 768px)', () => {
-      const stage = root.current?.querySelector('.exp-stage')
-      const cards = gsap.utils.toArray<HTMLElement>('.exp-card')
-      const numbers = gsap.utils.toArray<HTMLElement>('.exp-num')
-      const progress = root.current?.querySelector('.exp-progress')
-      if (!stage || !cards.length) return
-
-      gsap.set(cards, { autoAlpha: 0, y: 80, rotateX: 12, scale: 0.96 })
-      gsap.set(cards[0], { autoAlpha: 1, y: 0, rotateX: 0, scale: 1 })
-      gsap.set(numbers, { color: 'rgba(11,31,58,0.22)' })
-      gsap.set(numbers[0], { color: 'var(--signal)' })
-      if (progress) gsap.set(progress, { scaleX: 1 / cards.length })
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: stage,
-          start: 'top top',
-          end: () => `+=${cards.length * 90}%`,
-          pin: true,
-          scrub: 0.75,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
+    const ctx = gsap.context(() => {
+      gsap.from('.exp-head', {
+        y: 30,
+        autoAlpha: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: root.current, start: 'top 78%' },
       })
 
-      cards.forEach((card, i) => {
-        if (i === 0) {
-          tl.to({}, { duration: 0.35 })
-          return
-        }
+      gsap.utils.toArray<HTMLElement>('.exp-block').forEach((block, i) => {
+        const line = block.querySelector('.exp-line')
+        const body = block.querySelectorAll('.exp-fade')
 
-        tl.to(
-          cards[i - 1],
-          {
-            autoAlpha: 0,
-            y: -60,
-            rotateX: -10,
-            scale: 0.94,
-            duration: 0.55,
-            ease: 'power2.inOut',
-          },
-          '>',
-        )
-          .fromTo(
-            card,
-            { autoAlpha: 0, y: 80, rotateX: 12, scale: 0.96 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              rotateX: 0,
-              scale: 1,
-              duration: 0.55,
-              ease: 'power2.inOut',
-            },
-            '<0.08',
-          )
-          .fromTo(
-            card.querySelectorAll('.exp-tag'),
-            { y: 18, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, stagger: 0.06, duration: 0.4, ease: 'power3.out' },
-            '<0.2',
-          )
-          .to(
-            numbers,
-            { color: 'rgba(11,31,58,0.22)', duration: 0.25, stagger: 0 },
-            '<',
-          )
-          .to(numbers[i], { color: 'var(--signal)', duration: 0.25 }, '<')
-
-        if (progress) {
-          tl.to(
-            progress,
-            { scaleX: (i + 1) / cards.length, duration: 0.55, ease: 'none' },
-            '<',
-          )
-        }
-
-        tl.to({}, { duration: 0.3 })
-      })
-
-      const tags = cards[0]?.querySelectorAll('.exp-tag')
-      if (tags?.length) {
         gsap.fromTo(
-          tags,
-          { y: 20, autoAlpha: 0 },
+          line,
+          { scaleX: 0 },
           {
-            y: 0,
-            autoAlpha: 1,
-            stagger: 0.08,
-            duration: 0.5,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: stage, start: 'top 80%' },
-          },
-        )
-      }
-
-      return () => {
-        tl.scrollTrigger?.kill()
-        tl.kill()
-      }
-    })
-
-    mm.add('(max-width: 767px)', () => {
-      const cards = gsap.utils.toArray<HTMLElement>('.exp-card-mobile')
-      gsap.set(cards, { autoAlpha: 0, y: 50 })
-
-      cards.forEach((card) => {
-        gsap.to(card, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.75,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 88%',
-            toggleActions: 'play none none reverse',
-          },
-        })
-
-        const tags = card.querySelectorAll('.exp-tag')
-        gsap.fromTo(
-          tags,
-          { y: 16, autoAlpha: 0 },
-          {
-            y: 0,
-            autoAlpha: 1,
-            stagger: 0.08,
-            duration: 0.45,
-            ease: 'power3.out',
+            scaleX: 1,
+            duration: 0.9,
+            ease: 'power3.inOut',
             scrollTrigger: {
-              trigger: card,
-              start: 'top 85%',
+              trigger: block,
+              start: 'top 80%',
               toggleActions: 'play none none reverse',
             },
           },
         )
+
+        gsap.from(body, {
+          y: 36,
+          autoAlpha: 0,
+          duration: 0.75,
+          stagger: 0.09,
+          delay: 0.08,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: block,
+            start: 'top 78%',
+            toggleActions: 'play none none reverse',
+          },
+        })
+
+        gsap.from(block.querySelector('.exp-index'), {
+          x: i % 2 === 0 ? -24 : 24,
+          autoAlpha: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: block,
+            start: 'top 82%',
+            toggleActions: 'play none none reverse',
+          },
+        })
       })
-    })
+    }, root)
 
-    requestAnimationFrame(() => ScrollTrigger.refresh())
-
-    return () => mm.revert()
+    return () => ctx.revert()
   }, [])
 
   return (
-    <section id="experience" ref={root} className="relative bg-background">
-      <div className="exp-stage relative hidden h-svh md:block" style={{ perspective: '1200px' }}>
-        <div className="section-pad mx-auto flex h-full max-w-7xl flex-col py-24">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal">
-                Experience
-              </p>
-              <h2 className="mt-3 max-w-xl font-heading text-4xl font-semibold tracking-tight text-heading lg:text-5xl">
-                Roles where APIs met product shipping.
-              </h2>
-            </div>
-            <div className="flex gap-4">
-              {experience.map((item, index) => (
-                <span
-                  key={item.company}
-                  className="exp-num font-heading text-2xl font-semibold text-ink/25"
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-              ))}
-            </div>
-          </div>
+    <section
+      id="experience"
+      ref={root}
+      className="relative overflow-hidden bg-mist section-pad py-24 sm:py-32"
+    >
+      <div className="pointer-events-none absolute -right-[20%] top-0 h-[50%] w-[50%] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--signal)_14%,transparent),transparent_70%)]" />
 
-          <div className="exp-progress mt-6 h-1 origin-left scale-x-0 bg-signal" />
-
-          <div className="relative mt-8 flex-1">
-            {experience.map((item, index) => (
-              <article
-                key={item.company + item.period}
-                className="exp-card absolute inset-x-0 top-0 border border-border bg-card p-8 shadow-[0_24px_60px_-40px_rgba(11,18,32,0.35)] lg:p-10"
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <p className="font-heading text-sm font-semibold tracking-tight text-signal">
-                    {item.period}
-                  </p>
-                  <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                    Role {String(index + 1).padStart(2, '0')}
-                  </p>
-                </div>
-                <h3 className="mt-6 font-heading text-4xl font-semibold tracking-tight text-heading lg:text-5xl">
-                  {item.role}
-                </h3>
-                <p className="mt-2 text-lg text-ink/70">{item.company}</p>
-                <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                  {item.detail}
-                </p>
-                <ul className="mt-8 flex flex-wrap gap-2">
-                  {item.stack.map((tech) => (
-                    <li
-                      key={tech}
-                      className="exp-tag border border-border bg-muted px-3 py-1.5 text-xs font-medium text-ink"
-                    >
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="grid gap-8 border-b border-heading/10 pb-12 lg:grid-cols-[1fr_1.2fr] lg:items-end">
+          <div>
+            <p className="exp-head text-xs font-semibold uppercase tracking-[0.22em] text-signal">
+              Experience
+            </p>
+            <h2 className="exp-head mt-4 font-heading text-[clamp(2.6rem,5.5vw,4.2rem)] font-semibold leading-[0.94] tracking-[-0.04em] text-heading">
+              Work & study that shaped the craft.
+            </h2>
           </div>
+          <p className="exp-head max-w-md text-base leading-relaxed text-muted-foreground lg:justify-self-end lg:text-right">
+            Two chapters — shipping full-stack product work remotely, and the
+            engineering degree behind it.
+          </p>
         </div>
-      </div>
 
-      <div className="section-pad mx-auto max-w-7xl py-20 md:hidden">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal">
-          Experience
-        </p>
-        <h2 className="mt-3 font-heading text-4xl font-semibold tracking-tight text-heading">
-          Roles where APIs met product shipping.
-        </h2>
-        <div className="mt-10 space-y-5">
+        <div className="mt-6 divide-y divide-heading/10">
           {experience.map((item, index) => (
             <article
-              key={item.company + item.period}
-              className="exp-card-mobile border border-border bg-card p-6"
+              key={item.company}
+              className="exp-block grid gap-8 py-14 lg:grid-cols-12 lg:gap-10"
             >
-              <p className="text-sm font-semibold text-signal">{item.period}</p>
-              <h3 className="mt-3 font-heading text-2xl font-semibold text-heading">
-                {item.role}
-              </h3>
-              <p className="mt-1 text-sm text-ink/70">{item.company}</p>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                {item.detail}
-              </p>
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {item.stack.map((tech) => (
-                  <li
-                    key={tech}
-                    className="exp-tag border border-border px-3 py-1.5 text-xs text-ink"
-                  >
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-4 text-xs text-muted-foreground">
-                {String(index + 1).padStart(2, '0')}
-              </p>
+              <div className="lg:col-span-3">
+                <p className="exp-index font-heading text-6xl font-semibold leading-none tracking-[-0.05em] text-heading/10 sm:text-7xl">
+                  {String(index + 1).padStart(2, '0')}
+                </p>
+                <p className="exp-fade mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-signal">
+                  {item.period}
+                </p>
+              </div>
+
+              <div className="lg:col-span-9">
+                <div className="exp-line mb-8 h-px origin-left bg-signal" />
+                <h3 className="exp-fade font-heading text-[clamp(1.9rem,3.8vw,3rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-heading">
+                  {item.role}
+                </h3>
+                <p className="exp-fade mt-3 text-lg text-heading/60">
+                  {item.company}
+                </p>
+                <p className="exp-fade mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                  {item.detail}
+                </p>
+
+                <div className="exp-fade mt-8 flex flex-wrap gap-3">
+                  {item.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="border-b border-signal/40 pb-0.5 font-heading text-sm font-semibold tracking-tight text-heading"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </article>
           ))}
         </div>

@@ -45,65 +45,23 @@ function Tilt({ children, className }: { children: ReactNode; className?: string
   )
 }
 
-/** Dance studio — class schedule + enrollment roster UI */
+/** Dance studio — Enrollio product shot */
 function StudioStage() {
-  const classes = [
-    { name: 'Contemporary', time: '09:00', seats: '12/16' },
-    { name: 'Hip-Hop Batch A', time: '11:30', seats: '18/20' },
-    { name: 'Ballet Foundations', time: '16:00', seats: '08/14' },
-  ]
-  const students = ['Asha K.', 'Rohan M.', 'Priya S.', 'Dev P.']
-
   return (
-    <div className="relative flex h-full flex-col overflow-hidden bg-heading text-mist">
-      <div className="studio-glow pointer-events-none absolute -right-16 top-0 size-56 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--signal)_40%,transparent),transparent_70%)]" />
-
-      <div className="relative z-10 flex items-center justify-between border-b border-white/10 px-6 py-4">
-        <div>
-          <p className="text-[10px] uppercase tracking-[0.2em] text-signal-soft">
-            Studio admin
-          </p>
-          <p className="mt-1 font-heading text-lg font-semibold">Today&apos;s classes</p>
-        </div>
-        <span className="studio-pulse rounded-full bg-signal px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]">
-          Live
-        </span>
-      </div>
-
-      <div className="relative z-10 flex-1 space-y-3 overflow-hidden px-5 py-5">
-        {classes.map((item) => (
-          <div
-            key={item.name}
-            className="studio-row flex items-center justify-between border border-white/10 bg-white/5 px-4 py-3"
-          >
-            <div>
-              <p className="font-heading text-sm font-semibold">{item.name}</p>
-              <p className="mt-1 text-xs text-mist/55">{item.time}</p>
-            </div>
-            <p className="text-xs text-signal-soft">{item.seats}</p>
-          </div>
-        ))}
-
-        <div className="studio-row mt-2 border border-white/10 bg-white/[0.03] px-4 py-3">
-          <p className="text-[10px] uppercase tracking-[0.18em] text-mist/45">
-            Enrollment
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {students.map((name) => (
-              <span
-                key={name}
-                className="studio-chip border border-white/15 bg-white/5 px-2.5 py-1 text-xs"
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="relative z-10 flex items-center justify-between border-t border-white/10 px-6 py-3 text-[10px] uppercase tracking-[0.16em] text-mist/50">
-        <span>Stripe billing</span>
-        <span className="text-signal-soft">MERN · JWT</span>
+    <div className="relative h-full overflow-hidden bg-[#f4f1ea]">
+      <img
+        src="/projects/class-registration-hero.webp"
+        alt="Enrollio dance studio platform — student classes and enrollment UI"
+        className="studio-img absolute inset-0 h-full w-full object-cover object-left-top"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-heading/25 via-transparent to-transparent" />
+      <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mist">
+          Enrollio
+        </p>
+        <p className="text-[10px] uppercase tracking-[0.16em] text-mist/70">
+          Studio SaaS
+        </p>
       </div>
     </div>
   )
@@ -195,34 +153,19 @@ export function Projects() {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        '.studio-row',
-        { autoAlpha: 0, x: -16 },
+        '.studio-img',
+        { scale: 1.08 },
         {
-          autoAlpha: 1,
-          x: 0,
-          stagger: 0.12,
-          duration: 0.55,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: '.studio-row', start: 'top 90%' },
+          scale: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.studio-img',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
         },
       )
-
-      gsap.to('.studio-pulse', {
-        scale: 1.06,
-        duration: 1.1,
-        yoyo: true,
-        repeat: -1,
-        ease: 'sine.inOut',
-      })
-
-      gsap.to('.studio-glow', {
-        x: 18,
-        y: 12,
-        duration: 5,
-        yoyo: true,
-        repeat: -1,
-        ease: 'sine.inOut',
-      })
 
       const tableTl = gsap.timeline({ repeat: -1, repeatDelay: 0.6 })
       const cells = gsap.utils.toArray<HTMLElement>('.table-cell')
