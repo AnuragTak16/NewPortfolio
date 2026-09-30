@@ -20,8 +20,8 @@ export function Experience() {
 
       gsap.set(cards, { autoAlpha: 0, y: 80, rotateX: 12, scale: 0.96 })
       gsap.set(cards[0], { autoAlpha: 1, y: 0, rotateX: 0, scale: 1 })
-      gsap.set(numbers, { color: 'rgba(11,18,32,0.25)' })
-      gsap.set(numbers[0], { color: '#0a7a6c' })
+      gsap.set(numbers, { color: 'rgba(11,31,58,0.22)' })
+      gsap.set(numbers[0], { color: 'var(--signal)' })
       if (progress) gsap.set(progress, { scaleX: 1 / cards.length })
 
       const tl = gsap.timeline({
@@ -75,10 +75,10 @@ export function Experience() {
           )
           .to(
             numbers,
-            { color: 'rgba(11,18,32,0.25)', duration: 0.25, stagger: 0 },
+            { color: 'rgba(11,31,58,0.22)', duration: 0.25, stagger: 0 },
             '<',
           )
-          .to(numbers[i], { color: '#0a7a6c', duration: 0.25 }, '<')
+          .to(numbers[i], { color: 'var(--signal)', duration: 0.25 }, '<')
 
         if (progress) {
           tl.to(
@@ -156,7 +156,7 @@ export function Experience() {
   }, [])
 
   return (
-    <section id="experience" ref={root} className="relative bg-[#eef2f6]">
+    <section id="experience" ref={root} className="relative bg-background">
       <div className="exp-stage relative hidden h-svh md:block" style={{ perspective: '1200px' }}>
         <div className="section-pad mx-auto flex h-full max-w-7xl flex-col py-24">
           <div className="flex items-end justify-between gap-6">
@@ -164,7 +164,7 @@ export function Experience() {
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal">
                 Experience
               </p>
-              <h2 className="mt-3 max-w-xl font-heading text-4xl font-semibold tracking-tight text-ink lg:text-5xl">
+              <h2 className="mt-3 max-w-xl font-heading text-4xl font-semibold tracking-tight text-heading lg:text-5xl">
                 Roles where craft met shipping speed.
               </h2>
             </div>
@@ -172,7 +172,7 @@ export function Experience() {
               {experience.map((item, index) => (
                 <span
                   key={item.company}
-                  className="exp-num font-heading text-2xl font-semibold"
+                  className="exp-num font-heading text-2xl font-semibold text-ink/25"
                 >
                   {String(index + 1).padStart(2, '0')}
                 </span>
@@ -186,7 +186,7 @@ export function Experience() {
             {experience.map((item, index) => (
               <article
                 key={item.company + item.period}
-                className="exp-card absolute inset-x-0 top-0 border border-ink/10 bg-white p-8 shadow-[0_24px_60px_-40px_rgba(11,18,32,0.35)] lg:p-10"
+                className="exp-card absolute inset-x-0 top-0 border border-border bg-card p-8 shadow-[0_24px_60px_-40px_rgba(11,18,32,0.35)] lg:p-10"
                 style={{ transformStyle: 'preserve-3d' }}
               >
                 <div className="flex flex-wrap items-start justify-between gap-4">
@@ -197,7 +197,7 @@ export function Experience() {
                     Role {String(index + 1).padStart(2, '0')}
                   </p>
                 </div>
-                <h3 className="mt-6 font-heading text-4xl font-semibold tracking-tight text-ink lg:text-5xl">
+                <h3 className="mt-6 font-heading text-4xl font-semibold tracking-tight text-heading lg:text-5xl">
                   {item.role}
                 </h3>
                 <p className="mt-2 text-lg text-ink/70">{item.company}</p>
@@ -208,7 +208,7 @@ export function Experience() {
                   {item.stack.map((tech) => (
                     <li
                       key={tech}
-                      className="exp-tag border border-ink/15 bg-[#eef2f6] px-3 py-1.5 text-xs font-medium text-ink"
+                      className="exp-tag border border-border bg-muted px-3 py-1.5 text-xs font-medium text-ink"
                     >
                       {tech}
                     </li>
@@ -224,17 +224,17 @@ export function Experience() {
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal">
           Experience
         </p>
-        <h2 className="mt-3 font-heading text-4xl font-semibold tracking-tight text-ink">
+        <h2 className="mt-3 font-heading text-4xl font-semibold tracking-tight text-heading">
           Roles where craft met shipping speed.
         </h2>
         <div className="mt-10 space-y-5">
           {experience.map((item, index) => (
             <article
               key={item.company + item.period}
-              className="exp-card-mobile border border-ink/10 bg-white p-6"
+              className="exp-card-mobile border border-border bg-card p-6"
             >
               <p className="text-sm font-semibold text-signal">{item.period}</p>
-              <h3 className="mt-3 font-heading text-2xl font-semibold text-ink">
+              <h3 className="mt-3 font-heading text-2xl font-semibold text-heading">
                 {item.role}
               </h3>
               <p className="mt-1 text-sm text-ink/70">{item.company}</p>
@@ -245,7 +245,7 @@ export function Experience() {
                 {item.stack.map((tech) => (
                   <li
                     key={tech}
-                    className="exp-tag border border-ink/15 px-3 py-1.5 text-xs text-ink"
+                    className="exp-tag border border-border px-3 py-1.5 text-xs text-ink"
                   >
                     {tech}
                   </li>

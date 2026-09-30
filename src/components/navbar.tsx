@@ -10,8 +10,7 @@ type NavHref = (typeof navLinks)[number]['href']
 const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 function scrambleTo(el: HTMLElement, next: string) {
-  const from = el.textContent ?? ''
-  const length = Math.max(from.length, next.length)
+  const length = Math.max((el.textContent ?? '').length, next.length)
   const state = { frame: 0 }
   const total = 12
 
@@ -23,11 +22,10 @@ function scrambleTo(el: HTMLElement, next: string) {
       const progress = state.frame / total
       let out = ''
       for (let i = 0; i < length; i += 1) {
-        if (i < Math.floor(progress * next.length)) {
-          out += next[i] ?? ''
-        } else {
-          out += glyphs[Math.floor(Math.random() * glyphs.length)]
-        }
+        out +=
+          i < Math.floor(progress * next.length)
+            ? (next[i] ?? '')
+            : glyphs[Math.floor(Math.random() * glyphs.length)]
       }
       el.textContent = out
     },
@@ -46,6 +44,7 @@ export function Navbar() {
   const scrambleRef = useRef<HTMLSpanElement>(null)
   const ringRef = useRef<SVGCircleElement>(null)
   const linkRefs = useRef<Array<HTMLAnchorElement | null>>([])
+  const chipReady = useRef(false)
   const activeLabel =
     navLinks.find((link) => link.href === active)?.label ?? 'Home'
 
@@ -82,21 +81,30 @@ export function Navbar() {
     const link = linkRefs.current[index]
     if (!nav || !chip || !link) return
 
-    const move = () => {
+    const place = (animate: boolean) => {
       const navBox = nav.getBoundingClientRect()
       const box = link.getBoundingClientRect()
-      gsap.to(chip, {
+      const props = {
         x: box.left - navBox.left,
-        width: box.width,
-        duration: 0.55,
+        width: Math.max(box.width, 8),
+      }
+      if (!animate || !chipReady.current) {
+        gsap.set(chip, props)
+        chipReady.current = true
+        return
+      }
+      gsap.to(chip, {
+        ...props,
+        duration: 0.45,
         ease: 'power3.out',
         overwrite: 'auto',
       })
     }
 
-    move()
-    window.addEventListener('resize', move)
-    return () => window.removeEventListener('resize', move)
+    place(true)
+    const onResize = () => place(false)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
   }, [active])
 
   useLayoutEffect(() => {
@@ -112,13 +120,20 @@ export function Navbar() {
   }, [progress])
 
   useLayoutEffect(() => {
-    gsap.from('.nav-in', {
-      y: 14,
-      autoAlpha: 0,
-      duration: 0.55,
-      stagger: 0.04,
-      ease: 'power3.out',
-    })
+    const items = gsap.utils.toArray<HTMLElement>('.nav-in')
+    if (!items.length) return
+    gsap.fromTo(
+      items,
+      { y: 10, autoAlpha: 0 },
+      {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.5,
+        stagger: 0.04,
+        ease: 'power3.out',
+        clearProps: 'transform',
+      },
+    )
   }, [])
 
   useEffect(() => {
@@ -127,7 +142,14 @@ export function Navbar() {
       gsap.fromTo(
         '.mobile-link',
         { y: 20, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, stagger: 0.05, duration: 0.4, ease: 'power3.out' },
+        {
+          y: 0,
+          autoAlpha: 1,
+          stagger: 0.05,
+          duration: 0.4,
+          ease: 'power3.out',
+          clearProps: 'transform',
+        },
       )
     }
     return () => {
@@ -164,7 +186,7 @@ export function Navbar() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 h-16 border-b border-ink/10 bg-[#f7f8fa]/92 text-ink backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-40 h-16 border-b border-border bg-[color:var(--nav-bg)] text-heading backdrop-blur-md">
       <div className="mx-auto flex h-full max-w-7xl items-center gap-5 px-5 sm:px-8">
         <a
           href="#home"
@@ -172,7 +194,7 @@ export function Navbar() {
             e.preventDefault()
             go('#home')
           }}
-          className="nav-in flex items-center gap-3"
+          className="nav-in flex items-center gap-3 text-heading"
         >
           <span className="relative grid size-9 place-items-center">
             <svg viewBox="0 0 36 36" className="absolute inset-0 size-9 -rotate-90">
@@ -181,7 +203,7 @@ export function Navbar() {
                 cy="18"
                 r="14"
                 fill="none"
-                stroke="rgba(11,18,32,0.12)"
+                stroke="rgba(11,31,58,0.22)"
                 strokeWidth="2"
               />
               <circle
@@ -190,27 +212,27 @@ export function Navbar() {
                 cy="18"
                 r="14"
                 fill="none"
-                stroke="#0a7a6c"
+                stroke="var(--signal)"
                 strokeWidth="2"
                 strokeLinecap="round"
               />
             </svg>
-            <span className="font-heading text-[10px] font-semibold">
+            <span className="font-heading text-[10px] font-semibold text-heading">
               {String(Math.round(progress * 100)).padStart(2, '0')}
             </span>
           </span>
-          <span className="hidden font-heading text-base font-semibold tracking-tight sm:block">
+          <span className="hidden font-heading text-base font-semibold tracking-tight text-heading sm:block">
             {site.name.split(' ')[0]}
           </span>
         </a>
 
-        <div className="nav-in hidden h-7 items-center overflow-hidden border-l border-ink/15 pl-4 md:flex">
-          <span className="mr-2 text-[10px] uppercase tracking-[0.18em] text-ink/40">
+        <div className="nav-in hidden h-7 items-center overflow-hidden border-l border-border pl-4 md:flex">
+          <span className="mr-2 text-[10px] uppercase tracking-[0.18em] text-heading/60">
             Now
           </span>
           <span
             ref={scrambleRef}
-            className="font-heading text-sm font-semibold tracking-[0.08em] text-[#0a7a6c]"
+            className="font-heading text-sm font-semibold tracking-[0.08em] text-signal"
           >
             HOME
           </span>
@@ -222,7 +244,7 @@ export function Navbar() {
         >
           <span
             ref={chipRef}
-            className="pointer-events-none absolute top-1/2 left-0 h-8 -translate-y-1/2 rounded-full bg-ink"
+            className="pointer-events-none absolute top-1/2 left-0 h-8 -translate-y-1/2 rounded-full bg-heading"
           />
           {navLinks.map((link, index) => {
             const isActive = active === link.href
@@ -239,12 +261,12 @@ export function Navbar() {
                   e.preventDefault()
                   go(link.href)
                 }}
-                className="nav-in relative z-10 flex h-full items-center px-3"
+                className="nav-in relative z-10 flex h-full items-center px-3.5"
               >
                 <span
                   className={cn(
-                    'text-sm font-medium transition-colors duration-300',
-                    isActive ? 'text-mist' : 'text-ink/55 hover:text-ink',
+                    'text-sm font-semibold transition-colors duration-300',
+                    isActive ? 'text-mist' : 'text-heading hover:text-signal',
                   )}
                 >
                   {link.label}
@@ -256,7 +278,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="ml-auto inline-flex size-10 items-center justify-center md:hidden"
+          className="ml-auto inline-flex size-10 items-center justify-center text-heading md:hidden"
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={() => setOpen((v) => !v)}
         >
@@ -266,8 +288,10 @@ export function Navbar() {
 
       <div
         className={cn(
-          'fixed inset-x-0 top-16 bottom-0 z-40 bg-[#f7f8fa] md:hidden',
-          open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
+          'fixed inset-x-0 top-16 bottom-0 z-40 bg-mist transition-opacity duration-300 md:hidden',
+          open
+            ? 'pointer-events-auto opacity-100'
+            : 'pointer-events-none opacity-0',
         )}
       >
         <nav className="flex flex-col px-6 pt-6">
@@ -280,8 +304,8 @@ export function Navbar() {
                 go(link.href)
               }}
               className={cn(
-                'mobile-link border-b border-ink/10 py-4 font-heading text-3xl font-semibold',
-                active === link.href ? 'text-[#0a7a6c]' : 'text-ink',
+                'mobile-link border-b border-border py-4 font-heading text-3xl font-semibold',
+                active === link.href ? 'text-signal' : 'text-heading',
               )}
             >
               {link.label}

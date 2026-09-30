@@ -49,11 +49,11 @@ function OrbitStage() {
   return (
     <div className="relative h-full overflow-hidden bg-ink text-mist">
       <div className="orbit-spin absolute left-1/2 top-1/2 size-72 -translate-x-1/2 -translate-y-1/2">
-        <span className="absolute left-1/2 top-0 size-3 -translate-x-1/2 rounded-full bg-[#d8f0eb]" />
+        <span className="absolute left-1/2 top-0 size-3 -translate-x-1/2 rounded-full bg-[color:var(--signal-soft)]" />
       </div>
-      <span className="orbit-ring absolute left-1/2 top-1/2 size-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#d8f0eb]/80" />
+      <span className="orbit-ring absolute left-1/2 top-1/2 size-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[color:var(--signal-soft)]/80" />
       <span className="orbit-ring absolute left-1/2 top-1/2 size-56 -translate-x-1/2 -translate-y-1/2 rounded-full border border-mist/25" />
-      <span className="orbit-ring absolute left-1/2 top-1/2 size-80 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#0a7a6c]" />
+      <span className="orbit-ring absolute left-1/2 top-1/2 size-80 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[color:var(--signal)]" />
       <span className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.22em] text-mist/70">
         Kinetic charts
       </span>
@@ -68,7 +68,7 @@ function NorthStage() {
       {['w-[92%]', 'w-[70%]', 'w-[84%]', 'w-[46%]', 'w-[78%]'].map((width) => (
         <span key={width} className={cn('north-line h-3 origin-left bg-ink', width)} />
       ))}
-      <span className="north-line h-3 w-[30%] origin-left bg-[#0a7a6c]" />
+      <span className="north-line h-3 w-[30%] origin-left bg-signal" />
     </div>
   )
 }
@@ -76,7 +76,7 @@ function NorthStage() {
 function PulseStage() {
   const heights = ['42%', '78%', '55%', '92%', '36%', '70%', '48%', '84%', '60%']
   return (
-    <div className="relative flex h-full items-end justify-between gap-3 overflow-hidden bg-[#0a7a6c] px-8 pb-0 pt-16">
+    <div className="relative flex h-full items-end justify-between gap-3 overflow-hidden bg-signal px-8 pb-0 pt-16">
       {heights.map((height) => (
         <span
           key={height}
@@ -138,7 +138,7 @@ export function Projects() {
         cells.forEach((cell, i) => {
           hop
             .to(cells, { backgroundColor: 'transparent', duration: 0.15 }, i * 0.42)
-            .to(cell, { backgroundColor: '#0a7a6c', duration: 0.3 }, i * 0.42)
+            .to(cell, { backgroundColor: 'var(--signal)', duration: 0.3 }, i * 0.42)
         })
       }
 
@@ -189,7 +189,7 @@ export function Projects() {
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal">
           Projects
         </p>
-        <h2 className="mt-4 max-w-xl font-heading text-4xl font-semibold tracking-tight text-ink sm:text-6xl">
+        <h2 className="mt-4 max-w-xl font-heading text-4xl font-semibold tracking-tight text-heading sm:text-6xl">
           Four tempos. One scroll.
         </h2>
 
@@ -211,7 +211,7 @@ export function Projects() {
                     <span className="px-3 text-border">/</span>
                     <span className="text-muted-foreground">{project.year}</span>
                   </p>
-                  <h3 className="mt-3 font-heading text-[clamp(2.4rem,4vw,4.2rem)] font-semibold leading-[0.92] tracking-[-0.04em] text-ink">
+                  <h3 className="mt-3 font-heading text-[clamp(2.4rem,4vw,4.2rem)] font-semibold leading-[0.92] tracking-[-0.04em] text-heading">
                     {project.title}
                   </h3>
                   <p className="mt-4 max-w-sm text-sm uppercase tracking-[0.16em] text-signal">

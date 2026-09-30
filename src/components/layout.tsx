@@ -17,7 +17,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <footer className="section-pad border-t border-border/70 py-10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="font-heading text-sm font-semibold text-ink">{site.name}</p>
+            <p className="font-heading text-sm font-semibold text-heading">{site.name}</p>
             <p className="mt-1 text-sm text-muted-foreground">{site.role}</p>
           </div>
           <p className="text-sm text-muted-foreground">

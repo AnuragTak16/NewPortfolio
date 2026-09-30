@@ -32,9 +32,9 @@ export function About() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.bio-word',
-        { color: '#8b97a8' },
+        { color: '#9a9088' },
         {
-          color: '#0b1220',
+          color: '#0b1f3a',
           ease: 'none',
           stagger: 0.12,
           scrollTrigger: {
@@ -110,9 +110,9 @@ export function About() {
           <span className="text-muted-foreground">{site.location}</span>
         </div>
 
-        <h2 className="bio-statement mt-8 max-w-5xl font-heading text-[clamp(2.6rem,6.4vw,5.6rem)] font-semibold leading-[0.96] tracking-[-0.045em]">
+        <h2 className="bio-statement mt-8 max-w-5xl font-heading text-[clamp(2.6rem,6.4vw,5.6rem)] font-semibold leading-[0.96] tracking-[-0.045em] text-heading">
           {words.map((word) => (
-            <span key={word} className="bio-word mr-[0.28em] inline-block text-[#8b97a8]">
+            <span key={word} className="bio-word mr-[0.28em] inline-block text-[#9a9088]">
               {word}
             </span>
           ))}
@@ -120,8 +120,8 @@ export function About() {
 
         <div className="mt-16 grid items-stretch gap-8 lg:grid-cols-12">
           <aside className="bio-panel relative flex min-h-80 flex-col justify-between overflow-hidden bg-ink px-7 py-8 text-mist lg:col-span-4">
-            <p className="text-xs uppercase tracking-[0.22em] text-[#d8f0eb]">Profile</p>
-            <p className="bio-monogram font-heading text-[6.5rem] font-semibold leading-none tracking-[-0.06em] text-transparent [-webkit-text-stroke:1.5px_rgba(216,240,235,0.85)]">
+            <p className="text-xs uppercase tracking-[0.22em] text-signal-soft">Profile</p>
+            <p className="bio-monogram font-heading text-[6.5rem] font-semibold leading-none tracking-[-0.06em] text-transparent [-webkit-text-stroke:1.5px_rgba(250,217,209,0.9)]">
               AT
             </p>
             <div>
@@ -148,7 +148,7 @@ export function About() {
               {principles.map((item) => (
                 <article key={item.id} className="bio-principle border-t border-border pt-4">
                   <p className="text-xs text-signal">{item.id}</p>
-                  <h3 className="mt-2 font-heading text-2xl font-semibold text-ink">
+                  <h3 className="mt-2 font-heading text-2xl font-semibold text-heading">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -168,7 +168,7 @@ export function About() {
             return (
               <div key={stat.label}>
                 <p
-                  className="bio-count font-heading text-5xl font-semibold tracking-tight text-ink sm:text-6xl"
+                  className="bio-count font-heading text-5xl font-semibold tracking-tight text-heading sm:text-6xl"
                   data-value={value}
                   data-suffix={suffix}
                   data-pad={value.startsWith('0') ? value.length : 0}

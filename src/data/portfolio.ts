@@ -54,7 +54,7 @@ export const projects = [
     description:
       'A realtime insights dashboard with kinetic charts and calm information hierarchy.',
     stack: ['React', 'TypeScript', 'D3'],
-    hue: 'from-[#0a7a6c]/35 to-[#0b1220]/15',
+    hue: 'from-[#e24a2c]/35 to-[#0b1f3a]/15',
   },
   {
     id: '02',
@@ -64,7 +64,7 @@ export const projects = [
     description:
       'A scroll-driven studio site where typography and pacing carry the narrative.',
     stack: ['Vite', 'GSAP', 'Tailwind'],
-    hue: 'from-[#3d5a80]/40 to-[#0b1220]/12',
+    hue: 'from-[#3d5a80]/40 to-[#0b1f3a]/12',
   },
   {
     id: '03',
@@ -74,7 +74,7 @@ export const projects = [
     description:
       'A conversion-focused storefront with tactile micro-interactions and fast browsing.',
     stack: ['Next.js', 'Stripe', 'CMS'],
-    hue: 'from-[#7a8fa6]/45 to-[#0b1220]/12',
+    hue: 'from-[#7a8fa6]/45 to-[#0b1f3a]/12',
   },
   {
     id: '04',
@@ -84,7 +84,7 @@ export const projects = [
     description:
       'Component library and docs that keep product teams shipping consistent UI.',
     stack: ['Storybook', 'React', 'Tokens'],
-    hue: 'from-[#0b1220]/30 to-[#d8f0eb]/45',
+    hue: 'from-[#0b1f3a]/30 to-[#fad9d1]/45',
   },
 ]
 

@@ -122,7 +122,7 @@ export function Connect() {
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal-soft">
                 Contact
               </p>
-              <h2 className="mt-4 font-heading text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-[0.92] tracking-[-0.04em]">
+              <h2 className="mt-4 font-heading text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-[0.92] tracking-[-0.04em] text-mist">
                 {word.split(' ').map((part) => (
                   <span key={part} className="block overflow-hidden">
                     {part.split('').map((char, i) => (

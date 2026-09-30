@@ -167,7 +167,7 @@ export function Stack() {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal">
               Stack
             </p>
-            <h2 className="mt-4 max-w-xl font-heading text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+            <h2 className="mt-4 max-w-xl font-heading text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
               Tools that stay in motion.
             </h2>
           </div>
@@ -178,9 +178,9 @@ export function Stack() {
         </div>
 
         <div className="stack-stage relative mt-14 overflow-hidden border border-border/70 bg-ink px-5 py-12 text-mist sm:px-10 sm:py-14">
-          <div className="stack-glow pointer-events-none absolute left-1/2 top-1/2 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(10,122,108,0.28),transparent_68%)] opacity-30" />
+          <div className="stack-glow pointer-events-none absolute left-1/2 top-1/2 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--signal)_40%,transparent),transparent_68%)] opacity-30" />
           <div className="stack-orbit-a pointer-events-none absolute -left-24 top-1/2 size-[28rem] -translate-y-1/2 rounded-full border border-white/10" />
-          <div className="stack-orbit-b pointer-events-none absolute -right-20 top-8 size-[22rem] rounded-full border border-[#0a7a6c]/45" />
+          <div className="stack-orbit-b pointer-events-none absolute -right-20 top-8 size-[22rem] rounded-full border border-[color:var(--signal)]/45" />
 
           <div
             ref={tabsRef}
@@ -188,7 +188,7 @@ export function Stack() {
           >
             <span
               ref={markerRef}
-              className="pointer-events-none absolute top-0 left-0 hidden h-9 bg-[#d8f0eb] md:block"
+              className="pointer-events-none absolute top-0 left-0 hidden h-9 bg-[color:var(--signal-soft)] md:block"
             />
             {stackGroups.map((item, index) => (
               <button
@@ -203,7 +203,7 @@ export function Stack() {
                   active === index
                     ? 'text-ink md:text-ink'
                     : 'text-mist/55 hover:text-mist',
-                  active === index && 'bg-[#d8f0eb] md:bg-transparent',
+                  active === index && 'bg-[color:var(--signal-soft)] md:bg-transparent',
                 )}
               >
                 {item.label}
@@ -214,12 +214,12 @@ export function Stack() {
           <div className="relative z-10 mt-4 h-px w-full bg-white/10">
             <div
               ref={progressRef}
-              className="h-full origin-left scale-x-0 bg-[#3dbea8]"
+              className="h-full origin-left scale-x-0 bg-signal"
             />
           </div>
 
           <div className="relative z-10 mt-10 grid min-h-[14rem] content-start">
-            <p className="stack-label font-heading text-5xl font-semibold tracking-tight sm:text-6xl">
+            <p className="stack-label font-heading text-5xl font-semibold tracking-tight text-mist sm:text-6xl">
               {group.label}
             </p>
 
