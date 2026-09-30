@@ -117,18 +117,18 @@ export function Connect() {
   }, [])
 
   const ticker = [
-    'Open to remote roles',
-    'Full stack delivery',
+    'Open to remote',
+    'Full-stack delivery',
     'APIs · UI · Data',
     site.location,
-    'Say hello',
+    'Have an idea?',
   ]
 
   return (
     <section id="connect" ref={root} className="relative bg-mist">
       <div className="relative flex min-h-svh items-center overflow-hidden">
-        <p className="connect-ghost pointer-events-none absolute inset-x-0 top-[18%] select-none text-center font-heading text-[clamp(4rem,16vw,14rem)] font-semibold leading-none tracking-[-0.06em] text-heading/[0.08]">
-        Lets build the next thing.
+        <p className="connect-ghost pointer-events-none absolute inset-x-0 top-[18%] select-none text-center font-heading text-[clamp(4.5rem,17vw,15rem)] font-semibold leading-none tracking-[-0.065em] text-heading/[0.08]">
+          Have an idea?
         </p>
 
         <div className="connect-panel absolute inset-0 flex flex-col justify-between bg-heading text-mist">
@@ -137,7 +137,7 @@ export function Connect() {
               {[...ticker, ...ticker, ...ticker].map((item, i) => (
                 <span
                   key={`${item}-${i}`}
-                  className="text-xs font-semibold uppercase tracking-[0.22em] text-mist/45"
+                  className="text-[0.65rem] font-semibold uppercase tracking-[0.26em] text-mist/45"
                 >
                   {item}
                   <span className="ml-10 inline-block size-1.5 translate-y-[-1px] bg-signal" />
@@ -148,15 +148,15 @@ export function Connect() {
 
           <div className="section-pad mx-auto grid w-full max-w-7xl flex-1 items-center gap-12 py-16 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <p className="connect-rise text-xs font-semibold uppercase tracking-[0.22em] text-signal-soft">
-                Contact
+              <p className="connect-rise text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-signal-soft">
+                / 05 Contact
               </p>
-              <h2 className="connect-rise mt-5 font-heading text-[clamp(3rem,8vw,6.5rem)] font-semibold leading-[0.9] tracking-[-0.05em]">
-                Let&apos;s build
-                <span className="block text-signal">the next thing.</span>
+              <h2 className="connect-rise mt-5 font-heading text-[clamp(3.2rem,8.5vw,7rem)] font-semibold leading-[0.88] tracking-[-0.055em]">
+                Have an idea?
+                <span className="block text-signal">Let&apos;s build it.</span>
               </h2>
               <div className="connect-line mt-8 h-px w-28 bg-signal" />
-              <p className="connect-rise mt-8 max-w-md text-base leading-relaxed text-mist/65 sm:text-lg">
+              <p className="connect-rise mt-8 max-w-sm text-[0.95rem] leading-relaxed text-mist/60 sm:text-base">
                 Available for full-stack product work — APIs, data, and UI that
                 ship clean.
               </p>
@@ -166,7 +166,7 @@ export function Connect() {
               <Magnetic strength={0.2}>
                 <a
                   href={`mailto:${site.email}`}
-                  className="connect-rise group inline-flex items-center gap-3 border border-white/20 px-6 py-4 text-lg transition-colors hover:border-signal hover:text-signal-soft sm:text-xl"
+                  className="connect-rise group inline-flex items-center gap-3 border border-white/20 px-6 py-4 text-base transition-colors hover:border-signal hover:text-signal-soft sm:text-lg"
                 >
                   {site.email}
                   <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -180,7 +180,7 @@ export function Connect() {
                       href={social.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="connect-social group flex items-center justify-between border-t border-white/10 py-4 text-sm uppercase tracking-[0.16em] text-mist/55 transition-colors hover:text-mist"
+                      className="connect-social group flex items-center justify-between border-t border-white/10 py-4 text-[0.7rem] uppercase tracking-[0.2em] text-mist/55 transition-colors hover:text-mist"
                     >
                       {social.label}
                       <ArrowUpRight className="size-4 opacity-0 transition-all group-hover:opacity-100" />

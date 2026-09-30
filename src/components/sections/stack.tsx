@@ -158,36 +158,36 @@ export function Stack() {
         <div className="section-pad relative z-10 mx-auto flex min-h-svh max-w-7xl flex-col justify-center py-24">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-signal-soft">
-                Stack
+              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-signal-soft">
+                / 04 Stack
               </p>
               <div className="mt-5 overflow-hidden">
-                <h2 className="stack-cat font-heading text-[clamp(3.5rem,10vw,8rem)] font-semibold leading-[0.88] tracking-[-0.055em] text-mist">
+                <h2 className="stack-cat font-heading text-[clamp(3.8rem,11vw,8.5rem)] font-semibold leading-[0.86] tracking-[-0.06em] text-mist">
                   {group.label}
                 </h2>
               </div>
-              <p className="mt-5 max-w-sm text-sm leading-relaxed text-mist/50">
-                Scroll to move through Frontend, Backend, Data, and Delivery.
+              <p className="mt-6 max-w-xs text-[0.85rem] leading-relaxed text-mist/45">
+                Scroll through Frontend, Backend, Data, Delivery.
               </p>
             </div>
 
-            <nav className="flex flex-row flex-wrap gap-3 lg:flex-col lg:items-end lg:gap-2">
+            <nav className="flex flex-row flex-wrap gap-3 lg:flex-col lg:items-end lg:gap-2.5">
               {stackGroups.map((item, index) => (
                 <button
                   key={item.label}
                   type="button"
                   onClick={() => scrollToGroup(index)}
                   className={cn(
-                    'group flex items-center gap-3 font-heading text-sm font-semibold tracking-tight transition-colors',
+                    'group flex items-center gap-3 font-heading font-semibold tracking-tight transition-colors',
                     active === index
                       ? 'text-signal'
                       : 'text-mist/70 hover:text-mist',
                   )}
                 >
-                  <span className="text-[10px] tracking-[0.2em]">
+                  <span className="text-[0.6rem] tracking-[0.22em]">
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <span className="text-lg sm:text-xl">{item.label}</span>
+                  <span className="text-xl sm:text-2xl">{item.label}</span>
                   <span
                     className={cn(
                       'hidden h-px w-8 origin-right transition-transform lg:block',
@@ -208,7 +208,7 @@ export function Stack() {
           <div className="mt-14 flex min-h-[14rem] flex-wrap content-center items-center gap-x-4 gap-y-3 sm:min-h-[18rem] sm:gap-x-6 sm:gap-y-5">
             {group.items.map((item) => (
               <Magnetic key={`${group.label}-${item}`} strength={0.4}>
-                <span className="stack-tool inline-block font-heading text-[clamp(2rem,5.5vw,4.2rem)] font-semibold leading-none tracking-[-0.045em] text-mist transition-colors hover:text-signal">
+                <span className="stack-tool inline-block font-heading text-[clamp(2.15rem,5.8vw,4.5rem)] font-semibold leading-none tracking-[-0.05em] text-mist transition-colors hover:text-signal">
                   {item}
                 </span>
               </Magnetic>
@@ -246,23 +246,23 @@ export function Stack() {
 
       {/* Mobile: natural scroll through each group */}
       <div className="section-pad relative z-10 mx-auto max-w-7xl py-20 md:hidden">
-        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-signal-soft">
-          Stack
+        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-signal-soft">
+          / 04 Stack
         </p>
         <div className="mt-10 space-y-20">
           {stackGroups.map((item, index) => (
             <div key={item.label} className="stack-mobile-block">
-              <p className="font-heading text-sm tracking-[0.2em] text-signal">
+              <p className="font-heading text-[0.7rem] tracking-[0.22em] text-signal">
                 {String(index + 1).padStart(2, '0')}
               </p>
-              <h3 className="mt-3 font-heading text-5xl font-semibold tracking-tight text-mist">
+              <h3 className="mt-3 font-heading text-[clamp(2.8rem,12vw,3.5rem)] font-semibold tracking-[-0.045em] text-mist">
                 {item.label}
               </h3>
               <ul className="mt-8 flex flex-wrap gap-x-4 gap-y-3">
                 {item.items.map((tool) => (
                   <li
                     key={tool}
-                    className="font-heading text-2xl font-semibold tracking-tight text-mist/85"
+                    className="font-heading text-[1.35rem] font-semibold tracking-tight text-mist/85"
                   >
                     {tool}
                   </li>

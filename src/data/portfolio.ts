@@ -5,7 +5,7 @@ export const site = {
   location: 'Bengaluru, India',
   phone: '+91 9340392268',
   summary:
-    'Full Stack Developer with 2+ years of experience building and shipping production-grade web applications  strong in Node.js, Express, TypeScript, MongoDB, and Python backends, comfortable owning features end-to-end.',
+    'Full-stack developer with 2+ years shipping production web apps — Node.js, Express, TypeScript, MongoDB, and Python — owning features from schema to UI.',
 }
 
 export const navLinks = [
@@ -59,7 +59,7 @@ export const projects = [
     year: '2025',
     category: 'SaaS · MERN · TypeScript',
     description:
-      'Multi-tenant dance studio management — student profiles, enrollment workflows, attendance views, and Stripe subscription billing.',
+      'Multi-tenant studio ops — students, enrollment, attendance, and Stripe billing in one product.',
     stack: ['React', 'Node.js', 'MongoDB', 'Stripe', 'JWT'],
     image: '/projects/enrollio.png',
     hue: 'from-[#e24a2c]/35 to-[#0b1f3a]/15',
@@ -70,7 +70,7 @@ export const projects = [
     year: '2024',
     category: 'Realtime · Backend',
     description:
-      'US restaurant reservation platform with capacity-based seating, waitlists, atomic booking, and live table status over Socket.IO.',
+      'Capacity-aware seating, waitlists, atomic booking, and live table status over Socket.IO.',
     stack: ['Python', 'FastAPI', 'PostgreSQL', 'Socket.IO'],
     hue: 'from-[#3d5a80]/40 to-[#0b1f3a]/12',
   },
@@ -82,7 +82,7 @@ export const experience = [
     role: 'Full Stack Developer',
     company: 'DAAS – Developer-as-a-Service',
     detail:
-      'Owning end-to-end features across Python, Node.js, Express, React, and MongoDB — schema design, REST APIs, JWT auth, and frontend integration. Shipped 15+ API endpoints and reusable React/Tailwind components for production workflows.',
+      'End-to-end features across Python, Node, Express, React, and MongoDB — schema, REST APIs, JWT, and UI. Shipped 15+ endpoints and reusable React/Tailwind components.',
     stack: ['Python', 'Node.js', 'React', 'MongoDB', 'JWT'],
   },
   {
@@ -90,7 +90,7 @@ export const experience = [
     role: 'B.Tech CSE (AI & ML)',
     company: 'Acropolis Institute of Technology and Research',
     detail:
-      'Computer Science Engineering with AI & ML focus. CGPA 8.3. Built foundations in data structures, systems design, and full-stack product work.',
+      'CSE with AI & ML focus. CGPA 8.3. Foundations in DSA, systems, and full-stack product work.',
     stack: ['DSA', 'AI/ML', 'Web', 'Systems'],
   },
 ]
@@ -103,6 +103,6 @@ export const socials = [
 
 export const aboutStats = [
   { label: 'Years shipping', value: '02+' },
-  { label: 'REST APIs shipped', value: '15+' },
-  { label: 'CGPA', value: '8.3' },
+  { label: 'APIs shipped', value: '15+' },
+  { label: 'Degree CGPA', value: '8.3' },
 ]

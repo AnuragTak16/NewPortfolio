@@ -5,183 +5,146 @@ import { aboutStats, site } from '@/data/portfolio'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const statement = 'Shipping production apps end to end.'
-
-const principles = [
-  {
-    id: '01',
-    title: 'Own it',
-    detail: 'Schema to UI — features shipped as one coherent path.',
-  },
-  {
-    id: '02',
-    title: 'Reliable',
-    detail: 'Auth, validation, and indexes before the demo glow.',
-  },
-  {
-    id: '03',
-    title: 'Realtime',
-    detail: 'APIs and sockets that stay correct under concurrent use.',
-  },
-]
+const MUTED = '#b0aaa2'
+const HEADING = '#0b1f3a'
+const BODY = '#5f6570'
+const SIGNAL = '#e24a2c'
 
 export function About() {
   const root = useRef<HTMLElement>(null)
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.bio-word',
-        { color: '#9a9088' },
-        {
-          color: '#0b1f3a',
-          ease: 'none',
-          stagger: 0.12,
-          scrollTrigger: {
-            trigger: '.bio-statement',
-            start: 'top 78%',
-            end: 'top 32%',
-            scrub: true,
-          },
+      const titleWords = gsap.utils.toArray<HTMLElement>('.about-title-word')
+      const bodyCopy = gsap.utils.toArray<HTMLElement>('.about-body')
+      const meta = gsap.utils.toArray<HTMLElement>('.about-meta')
+      const stats = gsap.utils.toArray<HTMLElement>('.about-stat-value')
+
+      gsap.set(titleWords, { color: MUTED })
+      gsap.set(bodyCopy, { color: MUTED })
+      gsap.set(meta, { color: MUTED })
+      gsap.set(stats, { color: MUTED })
+
+      // Enter from hero → colors activate
+      const enter = gsap.timeline({
+        scrollTrigger: {
+          trigger: root.current,
+          start: 'top 85%',
+          end: 'top 35%',
+          scrub: 0.65,
         },
-      )
-
-      gsap.from('.bio-panel', {
-        clipPath: 'inset(100% 0 0 0)',
-        duration: 1.15,
-        ease: 'power4.inOut',
-        scrollTrigger: { trigger: '.bio-panel', start: 'top 85%' },
       })
 
-      gsap.from('.bio-copy', {
-        autoAlpha: 0,
-        filter: 'blur(8px)',
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '.bio-copy-wrap', start: 'top 80%' },
+      enter
+        .to(meta, { color: SIGNAL, stagger: 0.04, ease: 'none', duration: 0.4 }, 0)
+        .to(
+          titleWords,
+          { color: HEADING, stagger: 0.06, ease: 'none', duration: 0.55 },
+          0.05,
+        )
+        .to(
+          bodyCopy,
+          { color: BODY, stagger: 0.08, ease: 'none', duration: 0.5 },
+          0.15,
+        )
+        .to(
+          stats,
+          { color: HEADING, stagger: 0.08, ease: 'none', duration: 0.45 },
+          0.25,
+        )
+
+      // Leave toward below → colors fade back
+      const leave = gsap.timeline({
+        scrollTrigger: {
+          trigger: root.current,
+          start: 'bottom 70%',
+          end: 'bottom 20%',
+          scrub: 0.65,
+        },
       })
 
-      gsap.from('.bio-principle', {
+      leave
+        .to(titleWords, { color: MUTED, stagger: 0.04, ease: 'none', duration: 0.5 }, 0)
+        .to(bodyCopy, { color: MUTED, stagger: 0.05, ease: 'none', duration: 0.45 }, 0.05)
+        .to(meta, { color: MUTED, ease: 'none', duration: 0.4 }, 0.08)
+        .to(stats, { color: MUTED, stagger: 0.05, ease: 'none', duration: 0.4 }, 0.1)
+
+      gsap.from('.about-rise', {
+        y: 28,
         autoAlpha: 0,
-        y: 24,
         duration: 0.75,
-        stagger: 0.12,
+        stagger: 0.08,
         ease: 'power3.out',
-        scrollTrigger: { trigger: '.bio-principles', start: 'top 82%' },
+        scrollTrigger: { trigger: root.current, start: 'top 78%' },
       })
 
-      gsap.utils.toArray<HTMLElement>('.bio-count').forEach((el) => {
-        const target = Number(el.dataset.value ?? 0)
-        const suffix = el.dataset.suffix ?? ''
-        const pad = Number(el.dataset.pad ?? 0)
-        const counter = { val: 0 }
-        gsap.to(counter, {
-          val: target,
-          duration: 1.5,
-          ease: 'power2.out',
-          scrollTrigger: { trigger: el, start: 'top 88%' },
-          onUpdate: () => {
-            const shown = Math.round(counter.val)
-            el.textContent = `${String(shown).padStart(pad, '0')}${suffix}`
-          },
-        })
-      })
-
-      gsap.to('.bio-monogram', {
-        y: -18,
-        duration: 3.2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
+      gsap.from('.about-rail', {
+        scaleY: 0,
+        transformOrigin: 'top center',
+        duration: 1.1,
+        ease: 'power3.inOut',
+        scrollTrigger: { trigger: root.current, start: 'top 80%' },
       })
     }, root)
 
     return () => ctx.revert()
   }, [])
 
-  const words = statement.split(' ')
+  const title = 'Your product, one engineer — schema to UI.'
 
   return (
-    <section id="about" ref={root} className="section-pad py-24 sm:py-32">
+    <section
+      id="about"
+      ref={root}
+      className="relative overflow-hidden bg-[linear-gradient(180deg,var(--mist)_0%,#ebe6df_45%,var(--mist)_100%)] section-pad py-24 sm:py-32"
+    >
+      <div className="about-rail absolute left-0 top-0 hidden h-full w-1.5 bg-signal md:block" />
+
       <div className="mx-auto max-w-7xl">
-        <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.22em]">
-          <span className="text-signal">About</span>
-          <span className="text-muted-foreground">{site.location}</span>
-        </div>
-
-        <h2 className="bio-statement mt-8 max-w-5xl font-heading text-[clamp(2.6rem,6.4vw,5.6rem)] font-semibold leading-[0.96] tracking-[-0.045em] text-heading">
-          {words.map((word) => (
-            <span key={word} className="bio-word mr-[0.28em] inline-block text-[#9a9088]">
-              {word}
-            </span>
-          ))}
-        </h2>
-
-        <div className="mt-16 grid items-stretch gap-8 lg:grid-cols-12">
-          <aside className="bio-panel relative flex min-h-80 flex-col justify-between overflow-hidden bg-ink px-7 py-8 text-mist lg:col-span-4">
-            <p className="text-xs uppercase tracking-[0.22em] text-signal-soft">Profile</p>
-            <p className="bio-monogram font-heading text-[6.5rem] font-semibold leading-none tracking-[-0.06em] text-transparent [-webkit-text-stroke:1.5px_rgba(250,217,209,0.9)]">
-              AT
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.35fr)] lg:gap-20">
+          <div>
+            <p className="about-rise about-meta text-[0.65rem] font-semibold uppercase tracking-[0.28em]">
+              / 01 About
             </p>
-            <div>
-              <p className="font-heading text-2xl font-semibold">{site.name}</p>
-              <p className="mt-1 text-sm text-mist/65">{site.role}</p>
-            </div>
-          </aside>
-
-          <div className="bio-copy-wrap flex flex-col justify-between lg:col-span-8">
-            <div className="space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              <p className="bio-copy">
-                I&apos;m {site.name}, a {site.role.toLowerCase()} with 2+ years
-                building production web apps — Node.js, Express, TypeScript,
-                MongoDB, and Python backends, plus React on the frontend.
-              </p>
-              <p className="bio-copy">
-                I design scalable APIs, auth systems, realtime flows, and MVC
-                architectures, and I&apos;m comfortable owning features from
-                schema to UI. Based in {site.location}, open to remote teams
-                that ship fast.
-              </p>
-            </div>
-
-            <div className="bio-principles mt-12 grid gap-6 sm:grid-cols-3" style={{ perspective: '800px' }}>
-              {principles.map((item) => (
-                <article key={item.id} className="bio-principle border-t border-border pt-4">
-                  <p className="text-xs text-signal">{item.id}</p>
-                  <h3 className="mt-2 font-heading text-2xl font-semibold text-heading">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {item.detail}
-                  </p>
-                </article>
+            <h2 className="about-rise mt-6 font-heading text-[clamp(2.9rem,5.6vw,4.6rem)] font-semibold leading-[0.92] tracking-[-0.045em]">
+              {title.split(' ').map((word, i) => (
+                <span
+                  key={`${word}-${i}`}
+                  className="about-title-word mr-[0.28em] inline-block"
+                >
+                  {word}
+                </span>
               ))}
-            </div>
+            </h2>
+            <p className="about-rise about-meta mt-7 max-w-sm text-[0.7rem] uppercase tracking-[0.2em]">
+              {site.role}
+              <span className="mx-2 text-signal">/</span>
+              {site.location}
+            </p>
+          </div>
+
+          <div className="space-y-7">
+            <p className="about-rise about-body text-[1.35rem] leading-[1.45] sm:text-[1.65rem] sm:leading-[1.4]">
+              {site.summary}
+            </p>
+            <p className="about-rise about-body max-w-xl text-[0.95rem] leading-relaxed sm:text-base">
+              Schema design, REST APIs, JWT, sockets, and React — owned end to
+              end in remote, fast-paced teams.
+            </p>
           </div>
         </div>
 
-        <div className="mt-16 grid gap-8 border-t border-border/80 pt-10 sm:grid-cols-3">
-          {aboutStats.map((stat) => {
-            const match = stat.value.match(/^(\d+)(.*)$/)
-            const value = match?.[1] ?? '0'
-            const suffix = match?.[2] ?? ''
-            return (
-              <div key={stat.label}>
-                <p
-                  className="bio-count font-heading text-5xl font-semibold tracking-tight text-heading sm:text-6xl"
-                  data-value={value}
-                  data-suffix={suffix}
-                  data-pad={value.startsWith('0') ? value.length : 0}
-                >
-                  00{suffix}
-                </p>
-                <p className="mt-2 text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                  {stat.label}
-                </p>
-              </div>
-            )
-          })}
+        <div className="about-stats mt-20 grid gap-10 border-t border-heading/10 pt-12 sm:grid-cols-3">
+          {aboutStats.map((stat) => (
+            <div key={stat.label} className="about-rise">
+              <p className="about-stat-value font-heading text-[clamp(2.8rem,5vw,4rem)] font-semibold tracking-[-0.04em]">
+                {stat.value}
+              </p>
+              <p className="about-meta mt-3 text-[0.65rem] uppercase tracking-[0.22em]">
+                {stat.label}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

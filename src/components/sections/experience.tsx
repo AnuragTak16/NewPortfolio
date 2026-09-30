@@ -80,16 +80,16 @@ export function Experience() {
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="grid gap-8 border-b border-heading/10 pb-12 lg:grid-cols-[1fr_1.2fr] lg:items-end">
           <div>
-            <p className="exp-head text-xs font-semibold uppercase tracking-[0.22em] text-signal">
-              Experience
+            <p className="exp-head text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-signal">
+              / 03 Experience
             </p>
-            <h2 className="exp-head mt-4 font-heading text-[clamp(2.6rem,5.5vw,4.2rem)] font-semibold leading-[0.94] tracking-[-0.04em] text-heading">
-              Work & study that shaped the craft.
+            <h2 className="exp-head mt-5 font-heading text-[clamp(2.8rem,5.8vw,4.6rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-heading">
+              Two chapters. One craft.
             </h2>
           </div>
-          <p className="exp-head max-w-md text-base leading-relaxed text-muted-foreground lg:justify-self-end lg:text-right">
-            Two chapters — shipping full-stack product work remotely, and the
-            engineering degree behind it.
+          <p className="exp-head max-w-sm text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base lg:justify-self-end lg:text-right">
+            Shipping full-stack product work remotely — and the degree that
+            started it.
           </p>
         </div>
 
@@ -100,23 +100,23 @@ export function Experience() {
               className="exp-block grid gap-8 py-14 lg:grid-cols-12 lg:gap-10"
             >
               <div className="lg:col-span-3">
-                <p className="exp-index font-heading text-6xl font-semibold leading-none tracking-[-0.05em] text-heading/10 sm:text-7xl">
+                <p className="exp-index font-heading text-[clamp(3.5rem,8vw,5.5rem)] font-semibold leading-none tracking-[-0.055em] text-heading/10">
                   {String(index + 1).padStart(2, '0')}
                 </p>
-                <p className="exp-fade mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-signal">
+                <p className="exp-fade mt-6 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-signal">
                   {item.period}
                 </p>
               </div>
 
               <div className="lg:col-span-9">
                 <div className="exp-line mb-8 h-px origin-left bg-signal" />
-                <h3 className="exp-fade font-heading text-[clamp(1.9rem,3.8vw,3rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-heading">
+                <h3 className="exp-fade font-heading text-[clamp(2.1rem,4vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-heading">
                   {item.role}
                 </h3>
-                <p className="exp-fade mt-3 text-lg text-heading/60">
+                <p className="exp-fade mt-3 text-base text-heading/55 sm:text-lg">
                   {item.company}
                 </p>
-                <p className="exp-fade mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                <p className="exp-fade mt-6 max-w-2xl text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
                   {item.detail}
                 </p>
 
@@ -124,7 +124,7 @@ export function Experience() {
                   {item.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="border-b border-signal/40 pb-0.5 font-heading text-sm font-semibold tracking-tight text-heading"
+                      className="border-b border-signal/40 pb-0.5 font-heading text-[0.85rem] font-semibold tracking-tight text-heading"
                     >
                       {tech}
                     </span>

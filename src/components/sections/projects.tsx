@@ -248,12 +248,15 @@ export function Projects() {
   return (
     <section id="projects" ref={root} className="section-pad py-24 sm:py-32">
       <div className="mx-auto max-w-7xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal">
-          Projects
+        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-signal">
+          / 02 Selected work
         </p>
-        <h2 className="mt-4 max-w-xl font-heading text-4xl font-semibold tracking-tight text-heading sm:text-6xl">
-          Work that shipped to production.
+        <h2 className="mt-5 max-w-2xl font-heading text-[clamp(2.8rem,6vw,5.2rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-heading">
+          Real projects. Real production.
         </h2>
+        <p className="mt-5 max-w-md text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
+          Built, shipped, and maintained — not demos.
+        </p>
 
         <div className="mt-20 flex flex-col gap-28 sm:gap-36">
           {projects.map((project, index) => {
@@ -286,21 +289,21 @@ export function Projects() {
                       : 'lg:col-start-1 lg:-mr-16',
                   )}
                 >
-                  <p className="font-heading text-sm text-signal">
+                  <p className="font-heading text-[0.8rem] text-signal">
                     {project.id}
                     <span className="px-3 text-heading/25">/</span>
                     <span className="text-muted-foreground">{project.year}</span>
                   </p>
-                  <h3 className="mt-3 font-heading text-[clamp(2.2rem,3.8vw,3.8rem)] font-semibold leading-[0.94] tracking-[-0.04em] text-heading">
+                  <h3 className="mt-3 font-heading text-[clamp(2.4rem,4.2vw,4rem)] font-semibold leading-[0.92] tracking-[-0.045em] text-heading">
                     {project.title}
                   </h3>
-                  <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-signal">
+                  <p className="mt-4 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-signal">
                     {project.category}
                   </p>
-                  <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+                  <p className="mt-5 max-w-md text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
                     {project.description}
                   </p>
-                  <p className="mt-7 text-sm text-heading/80">
+                  <p className="mt-7 text-[0.8rem] uppercase tracking-[0.12em] text-heading/70">
                     {project.stack.join('  ·  ')}
                   </p>
                 </div>

@@ -66,7 +66,7 @@ export function Marquee() {
             key={`${skill}-${i}`}
             className="flex shrink-0 items-center px-5 sm:px-8"
           >
-            <span className="font-heading text-[clamp(1.6rem,4vw,2.6rem)] font-semibold tracking-[-0.03em] text-heading/80">
+            <span className="font-heading text-[clamp(1.85rem,4.5vw,3rem)] font-semibold tracking-[-0.035em] text-heading/75">
               {skill}
             </span>
             <span className="ml-5 size-1.5 shrink-0 rotate-45 bg-signal sm:ml-8" />

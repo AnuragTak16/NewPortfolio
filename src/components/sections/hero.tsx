@@ -9,10 +9,10 @@ import { scrollToId } from '@/hooks/use-smooth-scroll'
 gsap.registerPlugin(ScrollTrigger)
 
 const lines = [
-  'Building production',
-  'web apps end to',
-  'end  APIs, data,',
-  'and UI.',
+  'Full-stack developer.',
+  'I take products from',
+  'database to browser',
+  'and ship them.',
 ]
 
 export function Hero() {
@@ -23,27 +23,23 @@ export function Hero() {
       const intro = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
       intro
-        .from('.hero-kicker', { autoAlpha: 0, y: 14, duration: 0.55 })
+        .from('.hero-kicker', { autoAlpha: 0, y: 8, duration: 0.28 })
         .from(
           '.hero-line-inner',
           {
             yPercent: 110,
-            duration: 1.05,
-            stagger: 0.1,
+            duration: 0.45,
+            stagger: 0.045,
             ease: 'power4.out',
           },
-          '-=0.15',
-        )
-        .from(
-          '.hero-aside',
-          { autoAlpha: 0, y: 18, stagger: 0.1, duration: 0.65 },
-          '-=0.45',
+          '-=0.1',
         )
         .from(
           '.hero-cta',
-          { autoAlpha: 0, y: 14, stagger: 0.08, duration: 0.5 },
-          '-=0.3',
+          { autoAlpha: 0, y: 10, stagger: 0.04, duration: 0.28 },
+          '-=0.15',
         )
+        .from('.hero-aside', { autoAlpha: 0, y: 10, duration: 0.28 }, '-=0.2')
 
       gsap.to('.hero-wash', {
         xPercent: 6,
@@ -72,7 +68,7 @@ export function Hero() {
     <section
       id="home"
       ref={root}
-      className="relative flex min-h-svh items-center overflow-hidden pb-14 pt-28 sm:pb-16 sm:pt-32"
+      className="relative flex min-h-svh items-end overflow-hidden pb-10 pt-24 sm:pb-12 sm:pt-28"
     >
       <div className="absolute inset-0" aria-hidden>
         <div className="absolute inset-0 bg-[linear-gradient(155deg,var(--hero-a)_0%,var(--hero-b)_46%,var(--hero-c)_100%)]" />
@@ -81,57 +77,57 @@ export function Hero() {
         <div className="hero-shift absolute right-[8%] top-[18%] hidden h-44 w-px bg-gradient-to-b from-signal/55 to-transparent lg:block" />
       </div>
 
-      <div className="section-pad relative z-10 mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-12 lg:items-end lg:gap-8">
-        <div className="lg:col-span-8">
-          <p className="hero-kicker text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-signal sm:text-xs">
-            {site.role} · {site.location}
-          </p>
+      <div className="section-pad relative z-10 mx-auto flex w-full max-w-[100rem] flex-col gap-8">
+        <p className="hero-kicker text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-signal sm:text-[0.7rem]">
+          {site.role} · {site.location}
+        </p>
 
-          <h1 className="mt-5 max-w-[11ch] font-heading text-[clamp(2.85rem,7.2vw,5.85rem)] font-semibold leading-[0.9] tracking-[-0.05em] text-heading sm:max-w-none">
-            {lines.map((line) => (
-              <span key={line} className="block overflow-hidden">
-                <span className="hero-line-inner inline-block pb-[0.04em]">
-                  {line}
-                </span>
+        <h1 className="font-heading text-[clamp(2.6rem,9.2vw,7.8rem)] font-semibold leading-[0.88] tracking-[-0.055em] text-heading">
+          {lines.map((line) => (
+            <span key={line} className="block overflow-hidden">
+              <span className="hero-line-inner inline-block pb-[0.03em]">
+                {line}
               </span>
-            ))}
-          </h1>
+            </span>
+          ))}
+        </h1>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3 sm:mt-11">
+        <div className="flex flex-col gap-8 border-t border-heading/10 pt-6 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
+          <div className="flex flex-wrap items-center gap-3">
             <Magnetic>
               <button
                 type="button"
                 onClick={() => scrollToId('#projects')}
-                className="hero-cta inline-flex items-center bg-heading px-6 py-3.5 text-base font-medium text-mist transition-colors hover:bg-signal"
+                className="hero-cta inline-flex items-center bg-heading px-6 py-3.5 text-[0.95rem] font-medium text-mist transition-colors hover:bg-signal sm:text-base"
               >
-                View selected work
+                Selected work
               </button>
             </Magnetic>
             <Magnetic strength={0.25}>
               <button
                 type="button"
                 onClick={() => scrollToId('#connect')}
-                className="hero-cta inline-flex items-center gap-2 border border-heading/20 px-6 py-3.5 text-base font-medium text-heading transition-colors hover:border-signal hover:text-signal"
+                className="hero-cta inline-flex items-center gap-2 border border-heading/20 px-6 py-3.5 text-[0.95rem] font-medium text-heading transition-colors hover:border-signal hover:text-signal sm:text-base"
               >
                 Start a project
                 <ArrowDownRight className="size-4" />
               </button>
             </Magnetic>
           </div>
-        </div>
 
-        <div className="hero-aside flex flex-col lg:col-span-4 lg:items-end lg:pb-1">
-          <p className="max-w-[18rem] text-[0.95rem] leading-[1.65] text-muted-foreground sm:text-base lg:text-right">
-            {site.summary}
-          </p>
-          <button
-            type="button"
-            onClick={() => scrollToId('#about')}
-            className="hero-aside mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-heading/70 transition-colors hover:text-signal lg:mt-10"
-          >
-            Explore
-            <ArrowDownRight className="size-3.5" />
-          </button>
+          <div className="hero-aside flex max-w-sm flex-col sm:items-end sm:text-right">
+            <p className="text-sm leading-[1.65] text-muted-foreground">
+              {site.summary}
+            </p>
+            <button
+              type="button"
+              onClick={() => scrollToId('#about')}
+              className="mt-5 inline-flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.22em] text-heading/70 transition-colors hover:text-signal"
+            >
+              Scroll
+              <ArrowDownRight className="size-3.5" />
+            </button>
+          </div>
         </div>
       </div>
     </section>
