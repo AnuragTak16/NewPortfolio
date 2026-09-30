@@ -5,7 +5,7 @@ export const site = {
   location: 'Bengaluru, India',
   phone: '+91 9340392268',
   summary:
-    'Full-stack developer with 2+ years shipping production web apps — Node.js, Express, TypeScript, MongoDB, and Python — owning features from schema to UI.',
+    'Full-stack developer with 2+ years shipping production web apps — Node.js, Express, TypeScript, MongoDB, and Python owning features from schema to UI.',
 }
 
 export const navLinks = [

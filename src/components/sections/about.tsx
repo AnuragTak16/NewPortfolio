@@ -90,7 +90,7 @@ export function About() {
     return () => ctx.revert()
   }, [])
 
-  const title = 'Your product, one engineer — schema to UI.'
+  const title = 'Your product, one engineer from schema to UI.'
 
   return (
     <section

@@ -21,7 +21,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <p className="mt-1 text-sm text-muted-foreground">{site.role}</p>
           </div>
           <p className="text-sm text-muted-foreground">
-            Full-stack portfolio · {new Date().getFullYear()}
+             portfolio · {new Date().getFullYear()}
           </p>
         </div>
       </footer>
