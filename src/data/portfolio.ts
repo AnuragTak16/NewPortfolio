@@ -47,14 +47,26 @@ export const stackGroups = [
     items: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Kafka', 'SQLAlchemy'],
   },
   {
-    label: 'Delivery',
-    items: ['Docker', 'GitHub Actions', 'AWS', 'Azure', 'Nginx', 'Vercel'],
+    label: 'Architecture',
+    items: ['Docker', 'GitHub Actions', 'AWS', 'Azure', 'Nginx', 'Vercel', 'Kubernetes'],
   },
 ]
 
 export const projects = [
   {
     id: '01',
+    title: 'JivMaitri Pariwar',
+    year: '2026',
+    category: 'Nonprofit · Marketing · Edge',
+    description:
+      'Animal welfare site for rescue, shelter, and community care — stories, recognition wall, and volunteer CTAs.',
+    stack: ['React', 'TypeScript', 'Tailwind CSS', 'Cloudflare Workers'],
+    image: '/projects/jivmaitri.webp',
+    href: 'https://jivmaitriparivaar.anuragtak16.workers.dev/',
+    hue: 'from-[#2f5d3a]/35 to-[#0b1f3a]/15',
+  },
+  {
+    id: '02',
     title: 'Dance Studio Platform',
     year: '2025',
     category: 'SaaS · MERN · TypeScript',
@@ -65,7 +77,7 @@ export const projects = [
     hue: 'from-[#e24a2c]/35 to-[#0b1f3a]/15',
   },
   {
-    id: '02',
+    id: '03',
     title: 'Restaurant Waitlist',
     year: '2024',
     category: 'Realtime · Backend',

@@ -45,6 +45,28 @@ function Tilt({ children, className }: { children: ReactNode; className?: string
   )
 }
 
+/** JivMaitri Pariwar — animal welfare marketing site */
+function JivMaitriStage() {
+  return (
+    <div className="relative h-full overflow-hidden bg-[#1a2e1f]">
+      <img
+        src="/projects/jivmaitri.webp"
+        alt="JivMaitri Pariwar — animal welfare and rescue website"
+        className="jiv-img absolute inset-0 h-full w-full object-cover object-top"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-heading/40 via-transparent to-transparent" />
+      <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mist">
+          JivMaitri
+        </p>
+        <p className="text-[10px] uppercase tracking-[0.16em] text-mist/70">
+          Live on Workers
+        </p>
+      </div>
+    </div>
+  )
+}
+
 /** Dance studio — Enrollio product shot */
 function StudioStage() {
   return (
@@ -145,27 +167,30 @@ function WaitlistStage() {
   )
 }
 
-const stages = [StudioStage, WaitlistStage]
+const stages = [JivMaitriStage, StudioStage, WaitlistStage]
 
 export function Projects() {
   const root = useRef<HTMLElement>(null)
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.studio-img',
-        { scale: 1.08 },
-        {
-          scale: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '.studio-img',
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
+      const parallaxImgs = ['.studio-img', '.jiv-img']
+      parallaxImgs.forEach((selector) => {
+        gsap.fromTo(
+          selector,
+          { scale: 1.08 },
+          {
+            scale: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: selector,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
           },
-        },
-      )
+        )
+      })
 
       const tableTl = gsap.timeline({ repeat: -1, repeatDelay: 0.6 })
       const cells = gsap.utils.toArray<HTMLElement>('.table-cell')
@@ -306,6 +331,17 @@ export function Projects() {
                   <p className="mt-7 text-[0.8rem] uppercase tracking-[0.12em] text-heading/70">
                     {project.stack.join('  ·  ')}
                   </p>
+                  {'href' in project && project.href ? (
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-6 inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-signal transition-colors hover:text-heading"
+                    >
+                      View live
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : null}
                 </div>
               </article>
             )

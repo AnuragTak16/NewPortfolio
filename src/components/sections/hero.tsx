@@ -109,7 +109,7 @@ export function Hero() {
                 onClick={() => scrollToId('#connect')}
                 className="hero-cta inline-flex items-center gap-2 border border-heading/20 px-6 py-3.5 text-[0.95rem] font-medium text-heading transition-colors hover:border-signal hover:text-signal sm:text-base"
               >
-                Start a project
+                Hire me
                 <ArrowDownRight className="size-4" />
               </button>
             </Magnetic>

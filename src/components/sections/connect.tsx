@@ -117,18 +117,18 @@ export function Connect() {
   }, [])
 
   const ticker = [
-    'Open to remote',
+    'Open to opportunities',
     'Full-stack delivery',
     'APIs · UI · Data',
     site.location,
-    'Have an idea?',
+    'Remote · Hybrid · On-site',
   ]
 
   return (
     <section id="connect" ref={root} className="relative bg-mist">
       <div className="relative flex min-h-svh items-center overflow-hidden">
         <p className="connect-ghost pointer-events-none absolute inset-x-0 top-[18%] select-none text-center font-heading text-[clamp(4.5rem,17vw,15rem)] font-semibold leading-none tracking-[-0.065em] text-heading/[0.08]">
-          Have an idea?
+          Hire me.
         </p>
 
         <div className="connect-panel absolute inset-0 flex flex-col justify-between bg-heading text-mist">
@@ -152,13 +152,13 @@ export function Connect() {
                 / 05 Contact
               </p>
               <h2 className="connect-rise mt-5 font-heading text-[clamp(3.2rem,8.5vw,7rem)] font-semibold leading-[0.88] tracking-[-0.055em]">
-                Have an idea?
-                <span className="block text-signal">Let&apos;s build it.</span>
+                Hire me.
+                <span className="block text-signal">Let&apos;s build.</span>
               </h2>
               <div className="connect-line mt-8 h-px w-28 bg-signal" />
               <p className="connect-rise mt-8 max-w-sm text-[0.95rem] leading-relaxed text-mist/60 sm:text-base">
-                Available for full-stack product work — APIs, data, and UI that
-                ship clean.
+                Full-stack developer open to joining a team — APIs, data, and UI
+                that ship clean.
               </p>
             </div>
 
